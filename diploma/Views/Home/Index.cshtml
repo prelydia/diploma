@@ -1,0 +1,75 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@model IEnumerable<diploma.Models.User>
+@{ ViewBag.Title = "Главная страница"; }
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+<style>
+    .c-button {
+        border: 2px solid transparent;
+        /* другие стили */
+        background: transparent;
+        /*color: #ffffff;*/
+        border-color: #000000;
+        height: 40px;
+        width: 128px;
+        border-radius: 15px;
+        font-family: 'Gill Sans', sans-serif;
+    }
+
+    .grow:hover {
+        -webkit-transform: scale(1.3);
+        -ms-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+</style>
+
+<header>
+</header>
+
+<body style="position: relative;">
+    <div class="animate__animated animate__fadeInUp">
+        <div class="container" style="display: flex; margin-top: 105px;">
+            <div class="item">
+                <img style="width: 400px; margin-top: 44px;" src="~/images/particlesTitle2.png" />
+            </div>
+            <div class="item" style="float: right;">
+                <h1 class="animate__bounceInLeft" style="font-family: 'Gill Sans', sans-serif; font-size: 60px;"> @Localizer["Name1"] </h1>
+                <h1 style="font-family: 'Gill Sans', sans-serif; font-size: 60px;"> @Localizer["Name2"] </h1>
+                <h1 style="font-family: 'Gill Sans', sans-serif; font-size: 60px;"> @Localizer["Name3"]</h1>
+
+                <p class="text-muted" style="font-family: 'Gill Sans', sans-serif; font-size: 20px;">
+                    @Localizer["Description1"] <br />
+                    @Localizer["Description2"] <br /> @Localizer["Description3"]
+                </p>
+
+                <button class="c-button" style="width: 710px; height: 50px; margin-bottom: 5px; font-size: 30px;" onclick="location.href='@Url.Action("Index", "Method")'"> @Localizer["Button1"] </button> <br />
+                <button class="c-button" style="width: 710px; height: 50px; font-size: 30px; background: #000000; color: white;" onclick="location.href='@Url.Action("Info", "Home")'"> @Localizer["Button2"] </button>
+            </div>
+        </div>
+        <hr style="margin-top: 75px;" />
+
+        <div class="text-center p-3" style="background-color: rgba(255, 255, 255); font-family: 'Gill Sans', sans-serif">
+            Исследование выполнено за счет гранта Российского научного фонда № 22-79-10216<br />
+            <a href="https://rscf.ru/project/22-79-10216/" target="_blank"> https://rscf.ru/project/22-79-10216/ </a>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    $('.grow').click(function () {
+        Swal.fire({
+            icon: "info",
+            title: "@Localizer["Info"]"
+        });
+    });
+</script>
+
+

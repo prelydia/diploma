@@ -1,0 +1,17 @@
+﻿@model diploma.Models.Role
+@{
+    ViewBag.Title = "Редактирование роли";
+}
+<form asp-action="edit" asp-controller="role" asp-route-id="@Model.Id">
+    <div class="form-group">
+        <label asp-for="Id" class="control-label"> ID </label>
+        <input type="text" asp-for="Id" class="form-control" readonly="@(true)" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"> Название </label>
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Сохранить" class="btn btn-default" />
+    </div>
+</form>

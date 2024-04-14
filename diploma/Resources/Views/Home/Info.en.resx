@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="End" xml:space="preserve">
+    <value>th</value>
+  </data>
+  <data name="Figure1" xml:space="preserve">
+    <value>Figure 1. Angle </value>
+  </data>
+  <data name="Method1" xml:space="preserve">
+    <value>Orientation order parameter</value>
+  </data>
+  <data name="Method1And" xml:space="preserve">
+    <value>and the</value>
+  </data>
+  <data name="Method1Desc" xml:space="preserve">
+    <value>is a tool used in condensed medium physics to characterize the local structure of a set of neighboring particles around a given central particle. It was introduced by Steinhardt et al. and has since found application in various fields such as glass, jamming, melting, crystallization transitions and cluster formation. Orientation order parameter is a measure of the local structural order in the system. It is based on the idea that the local structure around a particle can be characterized by the arrangement of its adjacent particles. Orientation order parameter has become a standard tool in condensed medium physics, with applications including glass, jamming, melting or crystallization transitions, and cluster formation.</value>
+  </data>
+  <data name="Method1Form3" xml:space="preserve">
+    <value>is the angle of the line between the center of the isolated S particle (of the middle point of an S particle dimer)</value>
+  </data>
+  <data name="Method1Form4" xml:space="preserve">
+    <value>of the particle from its nearest neighbors, the arbitrary fixed axis report (Figure 1)</value>
+  </data>
+  <data name="Method1Form5" xml:space="preserve">
+    <value>is the number of immediate neighbours (coordination number),</value>
+  </data>
+  <data name="Method1Form6" xml:space="preserve">
+    <value>is the imaginary unit</value>
+  </data>
+  <data name="Method1Where" xml:space="preserve">
+    <value>where</value>
+  </data>
+  <data name="Method2" xml:space="preserve">
+    <value>Assessment of radial uniformity</value>
+  </data>
+  <data name="Method2Add" xml:space="preserve">
+    <value>of colloidal particles</value>
+  </data>
+  <data name="Method2Form2" xml:space="preserve">
+    <value>is an important aspect of quality control in manufacturing processes. Particle homogeneity is often subjectively evaluated by human observers, which can be time-consuming, tedious, and prone to human errors. Therefore, for an objective assessment of homogeneity, a more quantitative and reliable method is required. The proposed method has successfully identified the non-uniformity of particles with TRISO coating, caused by distortion in the radial distribution of particles. Simulation modeling demonstrated that the proposed method of quantitative homogeneity assessment is reliable and effective in detecting non-uniformity in spatial particle distribution. The following parameter was evaluated for assessing radial homogeneity:</value>
+  </data>
+  <data name="Method2Form3" xml:space="preserve">
+    <value>is the distance between the center of L-particle</value>
+  </data>
+  <data name="Method2Form4" xml:space="preserve">
+    <value>S-particle among its nearest neighbors</value>
+  </data>
+  <data name="Method2Form5" xml:space="preserve">
+    <value>is the average distance from the center of an L-particle to S-particles among its nearest neighbors</value>
+  </data>
+  <data name="Method3" xml:space="preserve">
+    <value>Bond length</value>
+  </data>
+  <data name="Method3And" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="Method3And1" xml:space="preserve">
+    <value>and the bond length deviation</value>
+  </data>
+  <data name="Method3And2" xml:space="preserve">
+    <value>defined as:</value>
+  </data>
+  <data name="Method3Form1" xml:space="preserve">
+    <value>in colloidal particles</value>
+  </data>
+  <data name="Method3Form2" xml:space="preserve">
+    <value>is a complex subject, requiring an understanding of both colloids and bond length. A colloid is a mixture in which one substance, composed of microscopically dispersed insoluble particles, is suspended in another substance. The dispersed phase particles have a diameter ranging approximately from 1 nanometer to 1 micrometer. In this context, bond length refers to the average distance between the nuclei of two bonded atoms in a molecule.</value>
+  </data>
+  <data name="Method3Form3" xml:space="preserve">
+    <value>is an inherent property of the bond between atoms of a specific type, relatively independent of the rest of the molecule. This implies that bond length depends on the types of atoms forming the bond, rather than the environment in which the bond exists. In the context of colloidal particles, it is important to note that bond length can vary depending on the particle type and the medium in which it is suspended.</value>
+  </data>
+  <data name="Method3Form4" xml:space="preserve">
+    <value>In previous studies concerning binary assemblies of superparamagnetic particles, one of such configurations with the potential of periodic space filling, i.e. an isolated S particle between four L particles located at the vertices of a square, was individuated, by studying two different metrics, i.e. the bond orientational order parameter</value>
+  </data>
+  <data name="Method3Form5" xml:space="preserve">
+    <value>is the distance between the S particle j and the neighbor L particle k and </value>
+  </data>
+  <data name="Method3Form6" xml:space="preserve">
+    <value>is the average distance between the S particle j and the N L nearest neighbors and</value>
+  </data>
+  <data name="Method3Form7" xml:space="preserve">
+    <value>for the square arrangement</value>
+  </data>
+  <data name="Method3Form8" xml:space="preserve">
+    <value>In our case, we developed a generalized procedure to identify all the different configurations. Such a procedure is based on the analysis of the angular and radial uniformity of L particles around an isolated S particle or around the middle point of an S particle dimer. First, L nearest neighbors are determined via Voronoi tessellation/Delaunay triangulation. Subsequently, for isolated S particles and the middle points of S particle dimers located within the convex polygons having as vertices three or four L particle neighbors, the angular and radial distribution of L particle neighbors with respect to the isolated S particle or to the middle point of the S particle dimer are scrutinized. The goal of the investigation is to check whether they meet the specific conditions satisfied by the ideal arrangements we are searching for. Such analyses aim at assessing whether the isolated S particle or the middle point of the S particle dimer is located approximately at the incenter of such polygons.</value>
+  </data>
+  <data name="Method3Picture" xml:space="preserve">
+    <value>Figure 1. Configurations of L particles around S particles: (a) Isolated S particles present alternatively in the interstices between L particles arranged in a hexagonal pattern; (b) isolated S particles present in the interstices between L particles arranged in a square pattern; (c) isolated S particles present in all the interstices between L particles arranged in a hexagonal pattern; (d) S particle dimers present between L particles arranged in a rhombic pattern; (e) S particles surrounded by L particles with angularly uniform and radially non-uniform distribution; (f) S particles surrounded by L particles with angularly non-uniform and radially non-uniform distribution</value>
+  </data>
+  <data name="Method4" xml:space="preserve">
+    <value>The shape factor</value>
+  </data>
+  <data name="Method4Form1" xml:space="preserve">
+    <value>represents a dimensionless quantity used in image analysis and microscopy, which describes the shape of a particle regardless of its size. In general, a colloid is a mixture in which one substance, composed of microscopically dispersed insoluble particles, is suspended in another substance. Some colloids appear semi-transparent due to the Tyndall effect, which involves the scattering of light by particles in the colloid. Other colloids may be opaque or exhibit weak coloring.</value>
+  </data>
+  <data name="Method4Form2" xml:space="preserve">
+    <value>In addition to the individuation of rhombic arrangements, we proceeded to the classification of their angle in order to understand whether they exhibit a mainly rhombic or square-like arrangement depending on the angle α reported in Figure 1(d). To this end, the ratio between the diagonals of such rhombic arrangements (degenerating in squares in the limit case) can be evaluated. Alternatively, the shape factors</value>
+  </data>
+  <data name="Method4Form3" xml:space="preserve">
+    <value>of the rhombic arrangements having as vertices four L particles and including the isolated S particle j or the middle point j of an S particle dimer can be estimated for the determination of</value>
+  </data>
+  <data name="Method4Form4" xml:space="preserve">
+    <value>relative to an isolated S particle or to the middle point of an S particle dimer j can be written as: </value>
+  </data>
+  <data name="Method4Form5" xml:space="preserve">
+    <value>represent the perimeter and the area of the rhombus having at the vertices the four L nearest neighbors to an isolated S particle or to the middle point of an S particle dimer j.  These metrics allow us to infer the angle α of the rhombi and to distinguish them into three different classes, respectively with</value>
+  </data>
+  <data name="Method4Form6" xml:space="preserve">
+    <value>The first class corresponds to rhombi degenerating in a configuration of L particles corresponding to a nearly hexagonal arrangement; in the case of closely packed L particles, the interstice between the four L particles would degenerate into two separate interstices for</value>
+  </data>
+  <data name="Method4Form7" xml:space="preserve">
+    <value>an isolated S particle, for such a configuration of L particles, would be located along the bridge between two neighbor L particles, i.e. along the line connecting the centers of two L particles in contact. The second class would correspond to a more rhombic-like arrangement, while the third class to a more square-like arrangement.</value>
+  </data>
+  <data name="Method4Pic1" xml:space="preserve">
+    <value>Figure 1. Angular and radial uniformity of quadrilaterals and triangles of L particles with respect to isolated S particles and S particle dimers: (a) Identification of isolated S particles involved in equilateral triangles and rhombi and of S particle dimers involved in rhombi; (b) classification of rhombi around S particles and S particle dimers according to the angle</value>
+  </data>
+  <data name="Method4Pic2" xml:space="preserve">
+    <value>(c) percentage of isolated S particles involved in equilateral triangles and rhombi and of S particle dimers involved in rhombi for variable particle number ratio</value>
+  </data>
+  <data name="Method4Pic3" xml:space="preserve">
+    <value>(d) angle classes of rhombi around isolated S particles for variable particle number ratio</value>
+  </data>
+  <data name="Method4Pic4" xml:space="preserve">
+    <value>(e) angle classes of rhombi around S particle dimers for variable particle number ratio </value>
+  </data>
+  <data name="Method5" xml:space="preserve">
+    <value>The Voronoi diagram</value>
+  </data>
+  <data name="Method5Form1" xml:space="preserve">
+    <value>is a partitioning of a plane into regions close to each of a given set of objects. In the simplest case, these objects are just a finite number of points on the plane, called seed points, nodes, or generators.
+
+To construct a Voronoi diagram, each cell can be built one after the other. This involves extending the bisectors of the line segments connecting each point combination, which can be quite inefficient.
+
+An alternative approach is to first construct the Delaunay triangulation of the points and then extend the bisectors of the triangle edges to obtain the Voronoi diagram. The Delaunay triangulation can be obtained without considering each point pair, and an efficient method involves projecting the points onto a paraboloid in a higher dimension.
+
+Another efficient alternative is the Sweep line algorithm, which gradually constructs the Voronoi cells, sequentially using binary search tree operations and a priority queue.</value>
+  </data>
+  <data name="Method5Form2" xml:space="preserve">
+    <value>Voronoi cells can be represented combinatorially using their vertices, edges, two-dimensional facets, and so on. Sometimes, the induced combinatorial structure is referred to as the Voronoi diagram. However, in the general case, Voronoi cells can be non-convex and even disconnected. In the usual Euclidean space, each Voronoi polygon corresponds to a generating point. All locations within a Voronoi polygon are closer to the generating point of that polygon than to any other generating point in the Voronoi diagram in the Euclidean plane.</value>
+  </data>
+  <data name="Method5Form3" xml:space="preserve">
+    <value>There is a straightforward algorithm for constructing the Voronoi diagram. For each point in the plane, one needs to compute the intersection of its circle with circles built around all other points. This intersection defines the Voronoi region boundary for that point. However, computing intersections for each point entails a time complexity that depends on the number of points and may be substantial.</value>
+  </data>
+  <data name="Method5Form4" xml:space="preserve">
+    <value>is the number of points in the plane.</value>
+  </data>
+  <data name="Method5Form5" xml:space="preserve">
+    <value>Another algorithm for constructing the Voronoi diagram is a recursive approach that divides the plane into four parts and then continues subdividing each part recursively until each region contains only a single point. This algorithm has a time complexity of O(nlogn), where n is the number of points in the plane.</value>
+  </data>
+  <data name="Method5Form6" xml:space="preserve">
+    <value>The Voronoi diagram finds wide applications in various fields such as computer graphics, geometric modeling, optimization, and more. For instance, it is used to address the Nelson-Erdős-Hadwiger problem, which involves finding an upper bound for the chromatic number in 2 or 3-dimensional Euclidean space.
+
+The properties of the Voronoi diagram are closely related to the Delaunay triangulation, where the Delaunay triangulation for a given set of points in the plane is a partitioning of the plane into triangles, such that no two points are inside the circumcircle of any triangle.
+
+There exists a one-to-one correspondence between the Voronoi diagram and the Delaunay triangulation. If the points are connected by edges, where the Voronoi regions share common boundaries, the resulting graph will represent the Delaunay triangulation.</value>
+  </data>
+  <data name="Method5Form7" xml:space="preserve">
+    <value>In colloidal systems, the Voronoi diagram can be utilized to determine the size and shape of colloidal particles. Colloidal particles can be identified as the centers of Voronoi cells where the volume of the dispersed phase penetrates inside the cell. Since Voronoi cells correspond to the nearest points, particle sizes can be determined as the distance between the centers of neighboring cells.</value>
+  </data>
+  <data name="Method5Pic1" xml:space="preserve">
+    <value>Figure 1. Example of Voronoi Diagram Construction</value>
+  </data>
+  <data name="Method6" xml:space="preserve">
+    <value>The Mean Squared Displacement</value>
+  </data>
+  <data name="Method6Form1" xml:space="preserve">
+    <value>In statistical mechanics, mean square displacement (MSD), also known as root mean square displacement or root mean square deviation, serves as a measure of the deviation in the particle's position from a reference point over time. It is a prevalent measure of the spatial extent of random motion and can be seen as quantifying the portion of a system "explored" by a random walker. In the field of biophysics and environmental engineering, MSD is tracked over time to determine whether particle dispersion is purely due to diffusion or if advective forces also contribute.
+
+Another significant concept related to deviations, the Variance of Relative Displacements (VRD), which is twice the square root of MSD, is also employed in studying transport and mixing phenomena in environmental engineering. This is notably relevant in the Debye-Waller factor (describing oscillations in the solid state) and the Langevin equation (describing Brownian particle diffusion).</value>
+  </data>
+  <data name="Method6Form2" xml:space="preserve">
+    <value>The Mean Squared Displacement (MSD) at a given time instant</value>
+  </data>
+  <data name="Method6Form3" xml:space="preserve">
+    <value>defined as the ensemble average (statistical mechanics):</value>
+  </data>
+  <data name="Method6Form4" xml:space="preserve">
+    <value>is the number of particles,</value>
+  </data>
+  <data name="Method6Form5" xml:space="preserve">
+    <value>is the total drying time of the droplet.</value>
+  </data>
+  <data name="Method7" xml:space="preserve">
+    <value>Concentric tetratic orientational order</value>
+  </data>
+  <data name="Method7Form1" xml:space="preserve">
+    <value>Experimental evidence [Sánchez, R., &amp; Aguirre-Manzo, L. A. (2015)] a system of tubular particles placed in a cylindrical cell is presented. A specially developed analysis was used to determine the degree of order of such structures. This analysis can also be applied in other geometries with different border shapes.</value>
+  </data>
+  <data name="Method7Form10" xml:space="preserve">
+    <value>Find the angle &lt;i&gt; θ &lt;/i&gt; between two vectors by the formula</value>
+  </data>
+  <data name="Method7Form11" xml:space="preserve">
+    <value>So we come to the formula</value>
+  </data>
+  <data name="Method7Form12" xml:space="preserve">
+    <value>From the cosine double angle formula follows</value>
+  </data>
+  <data name="Method7Form2" xml:space="preserve">
+    <value>Elongated rigid particles are common experimentally and include granular systems such as rice, some biological systems and colloidal systems such as nanotubes. Elongated particles can have orientational order.</value>
+  </data>
+  <data name="Method7Form3" xml:space="preserve">
+    <value>The tetratic orientation order characterizes the state of the system well if the components are aligned along or perpendicular to a fixed guiding vector, which may be the case in the volume. However, the direction of the tangent to the boundary in the shape of a circle is not fixed, but depends on the angular coordinate (polar coordinate system). Therefore, it is useful to define parameters that take into account the direction tangent to the nearest point of the boundary of the area in the form of a circle. In the region under consideration, this corresponds to the direction perpendicular to the radius vector &lt;b&gt; ϕ &lt;/b&gt; directed from the center of the region to the center of the particle. Thus, the concentric parameter of the tetratic order can be defined as</value>
+  </data>
+  <data name="Method7Form8" xml:space="preserve">
+    <value>where ∆θ  is the difference in angle between a particle’s orientation and that off ϕ at that point. This parameter becomes zero for an isotropic state, but as its director is determined by the angular position rather than by a maximization, it can take negative values, and would be −1 for a perfectly tetratic state with a director consistently at 45°from the cell diameter passing through the particle’s centre.</value>
+  </data>
+  <data name="Method7Form81" xml:space="preserve">
+    <value>where &lt;i&gt;θ&lt;/i&gt; is the angle between the particle orientation and direction &lt;b&gt;ϕ&lt;/b&gt; from the central point (x &lt;sub&gt;c&lt;/sub&gt;, y&lt;sub&gt;c&lt;/sub&gt;) tangent to the circle of the radius </value>
+  </data>
+  <data name="Method7Form82" xml:space="preserve">
+    <value>. The angular brackets denote an averaging of all particles belonging to a certain sub-area, for example, a ring of specified thickness.</value>
+  </data>
+  <data name="Method7Form83" xml:space="preserve">
+    <value>This parameter becomes zero for an isotropic state (fig.2a). In this case, the angle difference &lt;i&gt; θ &lt;/i&gt; can be approximately 22.5° or 67.5°.  Because the basis vector is determined by the angular position of the tangent, this parameter may also take negative values. Therefore, for an perfectly tetratic state (fig.2b) with a director permanently located at 45° from the particle orientation, this parameter is -1. The highest value of the tetratic order is 1 (fig.2c). In this case, the angle difference &lt;i&gt; θ &lt;/i&gt; is 0° or 90°.</value>
+  </data>
+  <data name="Method7Form91" xml:space="preserve">
+    <value>Suppose that the coordinates of the central and edge point of the elongated particle are known. On Figure 1, the vector</value>
+  </data>
+  <data name="Method7Form92" xml:space="preserve">
+    <value>is directed longitudinally from the center to the edge of the particle.</value>
+  </data>
+  <data name="Method7Pic" xml:space="preserve">
+    <value>(fig. 1)</value>
+  </data>
+  <data name="Method7Pic1" xml:space="preserve">
+    <value>Figure 1. Determination of the deflection angle &lt;i&gt; θ &lt;/i&gt;</value>
+  </data>
+  <data name="Method7Pic2" xml:space="preserve">
+    <value>Firure 2. Parameter Configuration Examples</value>
+  </data>
+  <data name="Methot1Form1" xml:space="preserve">
+    <value>To analyze the angular uniformity, orientation order parameter</value>
+  </data>
+  <data name="Methot1Form2" xml:space="preserve">
+    <value>calculated relatively to the isolated particle j as follows:</value>
+  </data>
+  <data name="Sources" xml:space="preserve">
+    <value>Sources</value>
+  </data>
+  <data name="TechImp" xml:space="preserve">
+    <value>Technical implementation</value>
+  </data>
+  <data name="TechImpText1" xml:space="preserve">
+    <value>In the implemented method, the circle is divided into subdomains of the ring. The number of rings is entered manually, and their width is calculated automatically. You can also set the boundaries of the coordinates &lt;i&gt; r &lt;/i&gt; included in the interval [0, &lt;i&gt;R&lt;/i&gt;], on which calculations will be performed.</value>
+  </data>
+  <data name="TechImpText1Temp" xml:space="preserve">
+    <value>is computed for every stick.</value>
+  </data>
+  <data name="TechImpText2" xml:space="preserve">
+    <value>The value of this parameter is averaged over all the sticks entering the sub-area (ring). Thus, the value</value>
+  </data>
+  <data name="TechImpText3" xml:space="preserve">
+    <value>for each sub-area is determined. The graph shows the dependence</value>
+  </data>
+  <data name="TechImpText4" xml:space="preserve">
+    <value>on the coordinate &lt;i&gt;r&lt;/i&gt;. Note that the spatial coordinates should be unmarked at radius &lt;i&gt;R&lt;/i&gt; in the input files. The scaling of the radius of the circle corresponds to one, and the x,y coordinates range from -1 to 1.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Implemented methods</value>
+  </data>
+  <data name="Title2" xml:space="preserve">
+    <value>You may want to learn more about the methods implemented</value>
+  </data>
+  <data name="Title3" xml:space="preserve">
+    <value>Here is a description and formulas of all methods. The «Sources» tab contains links with sources where you can find everything you need!</value>
+  </data>
+</root>

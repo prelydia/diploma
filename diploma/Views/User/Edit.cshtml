@@ -1,0 +1,129 @@
+﻿@model diploma.Models.User
+@{
+    ViewBag.Title = "Редактирование пользователя";
+}
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="utf-8"/>
+</head>
+
+<style>
+    .files {
+        float: left;
+    }
+
+    .item {
+        float: left;
+        width: stretch;
+    }
+</style>
+
+<!-- Картинка с пользователем -->
+<div class="container">
+    <div class="files" style="margin-bottom: 10px;">
+        <img src="~/images/user.png" style="width: 70px; height: 70px;" />
+    </div>
+
+    <div class="files">
+        <p style="margin-left: 10px; margin-top: 4px; font-size: 18px;"> <b> @ViewBag.User </b> </p>
+        <p class="text-muted" style="margin-top: -15px; margin-left: 10px; font-size: 14px;"> Редактирование пользователя @ViewBag.User </p>
+    </div>
+
+    <div class="files" style="float: right;">
+        <input type="image" onclick="window.location.href='/User/Index'" title="Список пользователей" src="/images/left-icon.png" style="width: 20px; height: 20px; margin-top: 20px;">
+    </div>
+
+    <p>⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>
+    <p>⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>
+</div>
+
+<form asp-action="edit" asp-controller="user" asp-route-id="@Model.Id" style="margin-left: 25px;" class="needs-validation">
+    <div class="row">
+        <div class="col-sm-4">
+            <label asp-for="Surname" for="firstName"> Фамилия </label>
+            <input asp-for="Surname" type="text" class="form-control" id="firstName" placeholder="" required="">
+            <div class="invalid-feedback">
+                Введите фамилию!
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label asp-for="Name" for="lastName"> Имя </label>
+            <input asp-for="Name" type="text" class="form-control" id="lastName" placeholder="" required="">
+            <div class="invalid-feedback">
+                Введите имя!
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label asp-for="Patronymic" for="patrName"> Отчество </label>
+            <input asp-for="Patronymic" type="text" class="form-control" id="patrName" placeholder="" required="">
+            <div class="invalid-feedback">
+                Введите отчество!
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3" style="margin-top: 5px;">
+        <label for="username"> Логин </label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <img src="/images/user.png" style="width: 24px; height: 24px;">
+                </span>
+            </div>
+            <input asp-for="Login" type="text" class="form-control" id="login" placeholder="Логин" required>
+            <div class="invalid-feedback" style="width: 100%;">
+                Введите логин!
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3" data-validate="Введите почту!">
+        <label for="email">Email</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <img src="/images/email.svg" style="width: 20px; height: 22px;">
+                </span>
+            </div>
+            <input class="form-control" asp-for="Email" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*&#64;[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" type="text" required>
+            <div class="invalid-feedback">
+                Пожалуйста, введите корректный email.
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="password"> Пароль </label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <img src="/images/password.png" style="width: 20px; height: 18px;">
+                </span>
+            </div>
+            <input asp-for="Password" type="text" pattern="^[0-9a-zA-Z!&#64;#$%^&*]{6,}$" class="form-control" id="passwor" required>
+            <div class="invalid-feedback">
+                Пожалуйста, введите пароль!
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mb-3">
+        <label for="role"> Роль </label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <img src="/images/role.png" style="width: 24px; height: 24px;">
+                </span>
+            </div>
+            <select asp-for="Role.Id"
+                    class="form-control"
+                    asp-items="@(new SelectList(ViewBag.Roles,"Value", "Text"))">
+            </select>
+        </div>
+    </div>
+
+    <hr class="mb-4">
+    <button class="btn btn-primary btn-lg btn-block" type="submit"> Сохранить </button>
+</form>

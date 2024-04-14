@@ -1,0 +1,229 @@
+﻿@using diploma.ViewModels
+@model UsersViewModel
+@{ ViewData["Title"] = "Пользоватети системы"; }
+
+<head>
+    <script src="jquery-3.6.3.min.js"></script>
+</head>
+
+<style>
+    .files {
+        float: left;
+    }
+
+    .item {
+        float: left;
+        width: stretch;
+    }
+
+    .c-button {
+        border: 2px solid transparent;
+        /* другие стили */
+        background: transparent;
+        /*color: #ffffff;*/
+        border-color: #000000;
+        height: 40px;
+        width: 128px;
+    }
+</style>
+
+<!-- Картинка с папкой -->
+<div class="container">
+    <div class="files" style="margin-bottom: 10px;">
+        <img src="~/images/users.png" style="width: 70px; height: 70px;" />
+    </div>
+
+    <div class="files">
+        <p style="margin-left: 10px; margin-top: 4px; font-size: 18px;"> <b> Пользователи </b> </p>
+        <p class="text-muted" style="margin-top: -15px; margin-left: 10px; font-size: 14px;"> Все пользователи, зарегистрировавшиеся в системе </p>
+    </div>
+
+    <div class="files" style="float: right;">
+        <button class="c-button" data-toggle="modal" data-target="#adduser" style="border-radius:30px; margin-left: 15px; margin-bottom: 10px; margin-top: 10px; margin-right: 15px; width: 172px;"> Добавить </button>
+    </div>
+
+    <p>⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>
+    <p>⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>
+</div>
+
+<!-- В случае отсутствия файлов -->
+@foreach (User user in Model.Users)
+{
+        <div class="container" style="display: flex;">
+            <a class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <p class="mb-1"> <img src="~/images/user.png" style="width: 30px; height: 30px;"> @user.Surname @user.Name </p>
+                </div>
+            </a>
+
+            @*<a class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <p class="mb-1"> <img src="~/images/account.png" style="width: 25px; height: 25px;"> @user.Login </p>
+                    </div>
+                </a>*@
+
+            <div class="testcont" style="float: right; display: flex;">
+                <div class="container" style="display: flex; margin-right: -28px;">
+                    <a class="list-group-item list-group-item-action" asp-action="Edit" asp-route-id="@user.Id"  style="width: 60px;">
+                        <div class="item one">
+                            <input type="image" src="/images/edit-icon.png" 
+                                   title="Изменить" style="width: 25px; height: 25px; position: relative;" name="@user.Name" />
+                        </div>
+                    </a>
+                </div>
+
+                <div class="container" style="display: flex;">
+                    <a class="list-group-item list-group-item-action" style="width: 60px;">
+                        <div class="item one">
+                            <input type="image" src="/images/delete.png" onclick="deleteUser()" name="@user.Id" title="Удалить" style="width: 25px; height: 25px; position: relative;" />
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+}
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<!-- Модальное окно добавления пользователя в систему (добавить проверку по полям) -->
+<div id="adduser" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> Добавить пользователя  </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <div class="validation" asp-validation-summary="ModelOnly"></div>
+
+                    <div class="form-group">
+                        <label> Фамилия </label><br />
+                        <input type="text" id="surname" class="form-control" />
+                    </div>
+                    <div>
+                        <label> Имя</label><br />
+                        <input type="text" id="name" class="form-control" />
+                    </div>
+                    <div>
+                        <label> Отчество</label><br />
+                        <input type="text" id="patr" class="form-control" />
+                    </div>
+                    <div>
+                        <label> Почта </label><br />
+                        <input type="email" id="email" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label> Роль </label><br />
+                        <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+                        <select id="roleid"
+                                class="form-control"
+                                asp-items="@(new SelectList(ViewBag.Roles,"Value", "Text"))">
+                            <option value="" disabled selected> Выберите роль </option>
+                        </select>
+                    </div>
+                    <div>
+                        <label> Логин</label><br />
+                        <input type="text" id="login" class="form-control" />
+                    </div>
+                    <div>
+                        <label> Пароль</label><br />
+                        <input id="passw" class="form-control" />
+                    </div>
+                    <div>
+                        <label>Повторите пароль</label><br />
+                        <input id="confpass" class="form-control" />
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <input type="submit" id="register" onclick="register()" value="Регистрация" class="btn btn-primary" />
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> Закрыть </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+    function deleteUser() {
+
+        var id = event.target.getAttribute("name");
+        
+        Swal.fire({
+            title: "Вы уверены?",
+            text: "Вы уверены, что хотите удалить этого пользователя?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Да",
+            confirmButtonColor: "#1e90ff",
+            cancelButtonText: "Отмена",
+        }).then(function (result) {
+
+            $.ajax({
+                url: '/User/Delete',
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                data: JSON.stringify(id),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    setTimeout(location.reload(), 500);
+
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Что-то не так...",
+                        text: "Проверьте правильность введенных данных"
+                    });
+                }
+            });
+            
+        });
+
+    }
+
+    function register() {
+
+        var passwd = $("#passw").val();
+        var conf = $("#confpass").val();
+
+        if (passwd != conf) {
+            Swal.fire({
+                icon: "error",
+                title: "Что-то не так...",
+                text: "Пароли не совпадают!"
+            });
+        } else {
+            
+            $.ajax({
+                url: '/Account/Register',
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                data: JSON.stringify($("#surname").val() + "+" + $("#name").val() + "+" + $("#patr").val() + "+" + $("#email").val() + "+" + $("#roleid").val() + " +" + $("#login").val() + "+" + $("#passw").val()),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    setTimeout(location.reload(), 500);
+
+
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Что-то не так...",
+                        text: "Проверьте правильность введенных данных"
+                    });
+                }
+            });
+        }
+    }
+</script>
+

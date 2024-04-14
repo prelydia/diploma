@@ -1,0 +1,233 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@using diploma.ViewModels
+@model ShowViewModel
+@{ ViewData["Title"] = "Файлы системы"; }
+<style>
+    .files {
+        float: left;
+    }
+
+    .item {
+        float: left;
+        width: stretch;
+    }
+
+    #next, #prev {
+        float: right;
+        margin-right: 30px;
+        margin-top: 10px;
+    }
+</style>
+@*<h1>Список пользователей</h1>
+    <table class="table">
+        <tr><th> Название </th><th> Дата </th> <th> Автор </th></tr>
+        @foreach (diploma.Models.File u in Model.Files)
+        {
+    <tr><td>@u.Name</td><td>@u.Date</td> <td> @u.Author.Login </td> </tr>}
+    </table>
+    @if (Model.PageViewModel.HasPreviousPage)
+    {
+    <a asp-action="Index" asp-controller="File"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       class="btn btn-outline-dark">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>}
+    @if (Model.PageViewModel.HasNextPage)
+    {
+    <a asp-action="Index" asp-controller="File"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       class="btn btn-outline-dark">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>}*@
+
+<!-- Картинка с папкой -->
+<div class="container">
+    <div class="files" style="margin-bottom: 10px;">
+        <img src="~/images/folders_prev.png" style="width: 60px; height: 60px;" />
+    </div>
+
+    <div class="files">
+        <p style="margin-left: 10px; margin-top: 4px; font-size: 18px;"> <b> @Localizer["Label"] </b> </p>
+        <p class="text-muted" style="margin-top: -15px; margin-left: 10px; font-size: 14px;"> @Localizer["LabelDesr"] </p>
+    </div>
+
+    <p>⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>
+    <p>⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>
+</div>
+
+<!-- Фильтрация данных -->
+<form method="get" style="margin-bottom: 10px;">
+
+    <div class="container">
+
+        <div class="item">
+            <input name="name" placeholder="Название файла" class="form-control" />
+        </div>
+
+        <div class="item">
+            <label class="control-label">  </label>
+        </div>
+
+        <div class="item">
+            <select name="author" asp-items="@(new SelectList(ViewBag.T,"Value", "Text"))" class="form-control" style="width: 450px;" opt></select>
+        </div>
+
+        <div class="item">
+            <input name="seldate" type="date" min="2018-02-22" id="date" class="form-control">
+        </div>
+
+        <div class="item">
+            <input type="submit" value="Фильтр" class="form-control" />
+        </div>
+
+    </div>
+
+</form>
+
+<!-- В случае отсутствия файлов -->
+@if (Model.Files.Any() == false)
+{
+    <p class="text-muted" style="margin-left: 15px; margin-top: 20px; font-size: 26px;"> <b> <br /> @Localizer["Missing"] </b> </p>}
+
+@foreach (diploma.Models.File file in Model.Files)
+{
+    <div class="container" style="display: flex;">
+        <a class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <p class="mb-1"> <img src="~/images/file_icon.png" style="width: 30px; height: 30px;"> @file.Name.Substring(0, file.Name.IndexOf("_"))@file.Name.Substring(file.Name.LastIndexOf(".")) </p>
+            </div>
+        </a>
+
+        <div class="testcont" style="float: right; display: flex;">
+            <div class="container" style="display: flex; margin-right: -28px;">
+                <a class="list-group-item list-group-item-action" style="width: 60px;">
+                    <div class="item one">
+                        <input type="image" src="/images/edit-icon.png" data-toggle="modal" data-target="#rename" pathId="@file.Id" pathDefault="@file.Path"
+                               title="Переименовать" style="width: 25px; height: 25px; position: relative;" onclick="getAttrb()" />
+                    </div>
+                </a>
+            </div>
+
+            <div class="container" style="display: flex; margin-right: -28px;">
+                <a class="list-group-item list-group-item-action" style="width: 60px;" href="#">
+                    <div class="item one">
+                        <input type="image" src="/images/eye.png" formtarget="_blank" onClick="window.open('@Url.Action("View", "User", new { fileToView = file.Name, pathh = file.Path})', '_blank')" title="Предпросмотр" style="width: 25px; height: 25px; position: relative;" />
+                    </div>
+                </a>
+            </div>
+
+            <div class="container" style="display: flex; margin-right: -28px;">
+                <a class="list-group-item list-group-item-action" style="width: 60px;">
+                    <div class="item one">
+                        <input type="image" src="/images/download.png" onclick="location.href='@Url.Action("Download", "File", new { fileToView = file.Name, pathh = file.Path })'" title="Скачать" style="width: 25px; height: 25px; position: relative;" />
+                    </div>
+                </a>
+            </div>
+
+            <div class="container" style="display: flex;">
+                <a class="list-group-item list-group-item-action" style="width: 60px;">
+                    <div class="item one">
+                        <input type="image" src="/images/delete.png" onclick="location.href='@Url.Action("DeleteConfirmed", "User", new { id = file.Id, pathh = file.Path })'" title="Удалить" style="width: 25px; height: 25px; position: relative;" />
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>}
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       class="btn btn-outline-dark" id="prev" style="margin-right: 30px;">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       class="btn btn-outline-dark" id="next" style="margin-right: 30px;">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>}
+
+
+<!-- Модальное окно редактирования файла -->
+<div id="rename" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> Переименовать файл  </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Название</label>
+                    <input type="text" class="form-control" id="newName" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" onclick="renameMethod()"> @Localizer["Save"] </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> @Localizer["Close"] </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<script>
+
+    var id; // id файла из БД (метод переименования)
+    var path; // путь файла из БД (метод переименования)
+
+
+    // helper для EditFile
+    function getAttrb(e) {
+        id = event.target.getAttribute("pathId");
+        path = event.target.getAttribute("pathDefault");
+
+        alert(path);
+    }
+
+    // редактирование файла
+    function renameMethod(e) {
+
+
+        $.ajax({
+            url: '/User/EditFile',
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: JSON.stringify(id + "+" + path + "+" + $("#newName").val()),
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                location.reload();
+
+
+            },
+            error: function () {
+                Swal.fire({
+                    icon: "error",
+                    title: "Что-то не так...",
+                    text: '@Localizer["Verify"]'
+                });
+            }
+        });
+
+        /*
+        var newName = $("#newName").val();
+
+        alert(newName);*/
+
+    }
+
+</script>
+

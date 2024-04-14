@@ -1,0 +1,298 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@model IEnumerable<diploma.Models.File>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewBag.Title = ViewBag.FoldName; }
+
+<style>
+
+    .files {
+        float: left;
+    }
+
+    .item {
+        float: left;
+        width: stretch;
+    }
+
+    .c-button {
+        border: 2px solid transparent;
+        /* другие стили */
+        background: transparent;
+        /*color: #ffffff;*/
+        border-color: #000000;
+        height: 40px;
+        width: 128px;
+    }
+</style>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+
+<div class="container">
+    <div class="files" style="margin-bottom: 10px;">
+        <img src="~/images/folders_prev.png" style="width: 60px; height: 60px;" />
+    </div>
+    <div class="files">
+        <p style="margin-left: 10px; margin-top: 4px; font-size: 18px;"> <b> @ViewBag.FoldName </b> </p>
+        <p class="text-muted" style="margin-top: -15px; margin-left: 10px; font-size: 14px;"> @Localizer["Content"] @ViewBag.FoldName </p>
+    </div>
+
+    <div class="files" style="float: right;">
+        <button class="c-button" data-toggle="modal" data-target="#addfile" style="border-radius:30px; margin-left: 15px; margin-bottom: 10px; margin-top: 10px; margin-right: 15px; width: 172px;"> @Localizer["Add"] </button>
+    </div>
+
+    <div class="files" style="float: right;">
+        <input type="image" onclick="window.location.href='/User/ShowFolders'" title="Список папок" src="/images/left-icon.png" style="width: 20px; height: 20px; margin-top: 20px;">
+    </div>
+
+    <p>⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>
+    <p>⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>
+</div>
+
+<form method="get" style="margin-bottom: 10px;">
+
+    <div class="container">
+
+        <div class="item">
+            <input name="name" placeholder="@Localizer["Name"]" class="form-control" />
+        </div>
+
+        <div class="item">
+            <label class="control-label">  </label>
+        </div>
+
+        <div class="item">
+            <input name="contains" placeholder="@Localizer["Search"]" style="width: 450px;" class="form-control" />
+        </div>
+
+        <div class="item">
+            <input name="seldate" type="date" min="2018-02-22" id="date" class="form-control">
+        </div>
+
+        <div class="item">
+            <input type="submit" value="@Localizer["Filter"]" class="form-control" />
+        </div>
+
+    </div>
+
+</form>
+
+<p>⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>
+
+
+@if (Model.Any() == false)
+{
+<p class="text-muted" style="margin-left: 15px; margin-top: 20px; font-size: 26px;"> <b> @Localizer["Empty"] </b> </p>}
+
+@foreach (var file in Model)
+{
+<div class="container" style="display: flex;">
+    <a class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <p class="mb-1"> <img src="~/images/file_icon.png" style="width: 30px; height: 30px;"> @file.Name.Substring(0, file.Name.LastIndexOf("_")) </p>
+        </div>
+    </a>
+
+    <div class="testcont" style="float: right; display: flex;">
+        <div class="container" style="display: flex; margin-right: -28px;">
+            <a class="list-group-item list-group-item-action" style="width: 60px;">
+                <div class="item one">
+                    <input type="image" src="/images/edit-icon.png" data-toggle="modal" data-target="#rename" pathId="@file.Id" pathDefault="@file.Path"
+                           title="@Localizer["Rename"]" style="width: 25px; height: 25px; position: relative;" onclick="getAttrb()" />
+                </div>
+            </a>
+        </div>
+
+        <div class="container" style="display: flex; margin-right: -28px;">
+            <a class="list-group-item list-group-item-action" style="width: 60px;" href="#">
+                <div class="item one">
+                    <input type="image" src="/images/eye.png" formtarget="_blank" onClick="window.open('@Url.Action("View", "User", new { fileToView = file.Name, pathh = file.Path})', '_blank')" title="@Localizer["Watch"]" style="width: 25px; height: 25px; position: relative;" />
+                </div>
+            </a>
+        </div>
+
+        <div class="container" style="display: flex; margin-right: -28px;">
+            <a class="list-group-item list-group-item-action" style="width: 60px;">
+                <div class="item one">
+                    <input type="image" src="/images/download.png" onclick="location.href='@Url.Action("Download", "File", new { fileToView = file.Name, pathh = file.Path })'" title="@Localizer["Download"]" style="width: 25px; height: 25px; position: relative;" />
+                </div>
+            </a>
+        </div>
+
+        <div class="container" style="display: flex;">
+            <a class="list-group-item list-group-item-action" style="width: 60px;">
+                <div class="item one">
+                    <input type="image" id="deleteButton" src="/images/delete.png" onclick="deleteConfirm(event)" fileid="@file.Id" path="@file.Path" title="@Localizer["Delete"]" style="width: 25px; height: 25px; position: relative;" />
+                </div>
+            </a>
+        </div>
+    </div>
+</div>}
+
+<!-- Модальное окно редактирования файла -->
+<div id="rename" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> @Localizer["Rename"]  </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>@Localizer["Name"]</label>
+                    <input type="text" class="form-control" id="newName" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" onclick="renameMethod()"> @Localizer["Save"] </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> @Localizer["Close"] </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<!-- Модальное окно добавления файла в систему -->
+<div id="addfile" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> @Localizer["Add"]  </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="AddFile" asp-controller="User" method="post" enctype="multipart/form-data">
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <button type="submit" class="btn btn-outline-secondary">
+                                <span class="button-text"> @Localizer["Download"] </span>
+                                <span class="button-icon">
+                                    <ion-icon name="cloud-download-outline"></ion-icon>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="uploadedFile">
+                            <label class="custom-file-label" for="customFile"> @Localizer["Choose"] </label>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> @Localizer["Close"] </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    var id; // id файла из БД (метод переименования)
+    var path; // путь файла из БД (метод переименования)
+
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+
+    // helper для EditFile
+    function getAttrb(e) {
+
+        id = event.target.getAttribute("pathId");
+        path = event.target.getAttribute("pathDefault");
+
+    }
+
+    // редактирование файла
+    function renameMethod(e) {
+
+
+        $.ajax({
+            url: '/User/EditFile',
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: JSON.stringify(id + "+" + path + "+" + $("#newName").val()),
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                location.reload();
+
+
+            },
+            error: function () {
+                Swal.fire({
+                    icon: "error",
+                    title: "@Localizer["Wrong"]",
+                    text: "@Localizer["Verify"]"
+                });
+            }
+        });
+
+    }
+
+    function deleteConfirm(event) {
+
+        var fileId = event.target.getAttribute('fileid');
+        var filePath = event.target.getAttribute('path');
+
+        Swal.fire({
+            title: "@Localizer["Sure"]",
+            text: "@Localizer["ConfirmDelete"]",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "@Localizer["Yes"]",
+            confirmButtonColor: "#1e90ff",
+            cancelButtonText: "@Localizer["Cancel"]",
+        }).then(function (result) {
+
+            if (result.isConfirmed) {
+                var url = '/User/DeleteConfirmed';
+                url = url + '?id=' + fileId + '&pathh=' + filePath;
+               
+                // Отправляем AJAX запрос на удаление файла
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (response) {
+                        // Если удаление прошло успешно, обновляем страницу
+                        window.location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        // Обработка ошибок при удалении файла
+                        console.error(error);
+                    }
+                });
+            }
+
+        });
+
+    }
+
+</script>
+
+
+
+
+
+

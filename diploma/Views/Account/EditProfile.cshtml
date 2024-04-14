@@ -1,0 +1,256 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model diploma.Models.User
+@{
+    ViewBag.Title = "Редактирование пользователя";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<meta charset="utf-8" />
+
+<form id="editform" asp-action="EditProfile" asp-controller="Account" asp-route-id="@Model.Id">
+    <div class="container">
+        <p> </p>
+        <hr>
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+                <div class="text-center">
+                    <img src="~/images/EditUser.png" class="avatar img-circle" alt="avatar" style="width:128px;">
+                    <p style="font-family: 'Gill Sans', sans-serif; margin-top: 5px;"> @ViewBag.NameProfile.Substring(0, ViewBag.NameProfile.LastIndexOf(" ")) </p>
+
+                    <a href="#" id="changePass" data-toggle="modal" data-target="#passchange" onclick="passwordAlert()"> <img src="~/images/change_password.png" style="width: 25px; height: 25px; margin-bottom: 10px;" /> @Localizer["EditPass"] </a>
+                </div>
+            </div>
+
+            <!-- edit form column -->
+            <div class="col-md-9 personal-info" style="font-family: 'Gill Sans', sans-serif;">
+                <div class="alert alert-info alert-dismissable">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <i class="fa fa-coffee"></i>
+                    @Localizer["Info"]
+                </div>
+                <h3 style="padding-left: 14px; font-family: 'Gill Sans', sans-serif;">  @Localizer["PersInfo"] </h3>
+
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">@Localizer["Surname"]</label>
+                        <div class="col-lg-8">
+                            <input type="text" asp-for="Surname" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">@Localizer["Name"]</label>
+                        <div class="col-lg-8">
+                            <input type="text" asp-for="Name" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">@Localizer["Patr"]</label>
+                        <div class="col-lg-8">
+                            <input type="text" asp-for="Patronymic" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Email</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" asp-for="Email" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*&#64;[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" type="email" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">@Localizer["Login"]</label>
+                        <div class="col-md-8">
+                            <input type="text" asp-for="Login" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <input type="submit" id="save" class="btn btn-primary" value="@Localizer["Save"]">
+                            <span></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr>
+</form>
+
+
+<!-- Модальное окно смены пароля пользователя -->
+<div id="passchange" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> @Localizer["EditPass2"] </h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="alert alert-info alert-dismissable">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <i class="fa fa-coffee"></i>
+                    @Localizer["Conf"]
+                </div>
+
+                <div class="mb-3">
+                    <label for="oldPass" class="col-form-label">@Localizer["OldPass"]</label>
+                    <input type="password" class="form-control" id="oldPass">
+                    <span class="focus-input100" />
+                    <label id="validOldPass" style="display: none; color: orangered;"> <b> @Localizer["Wrong"] </b> </label>
+                </div>
+                <div class="mb-3" data-validate="@Localizer["EntPass"]">
+                    <label for="newPass" class="col-form-label">@Localizer["NewPass"]</label>
+                    <input type="password" pattern="^[0-9a-zA-Z!&#64;#$%^&*]{6,}$" class="form-control" id="newPass" required>
+                    <span class="focus-input100" />
+                </div>
+                <div class="mb-3" data-validate="@Localizer["PassWarn"]">
+                    <label for="confirmedPass" class="col-form-label">@Localizer["ConfPass"]</label>
+                    <input type="password" class="form-control" id="confirmedPass">
+                    <span class="focus-input100" style="width: auto;" />
+                    <label id="valid" style="display: none; color: orangered;"> <b> @Localizer["Warn"] </b> </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="ModalSave" class="btn btn-primary" onclick="saveButton()" value="Сохранить"> @Localizer["Save"] </button>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var checkPass = false;
+
+    $('#oldPass').on('keyup input', function () {
+        var password = $("#oldPass").val();
+
+
+    });
+
+    $('#confirmedPass').on('keyup input', function () {
+        var pass1 = $("#newPass").val();
+        var pass2 = $("#confirmedPass").val();
+        var check = pass1 == pass2;
+
+        var valid = $('#valid');
+
+        check ? valid.hide() : valid.show();
+        check ? $("#ModalSave").prop("disabled", false) : $("#ModalSave").prop("disabled", true);
+
+    });
+
+    function passwordAlert() {
+        Swal.fire({
+            icon: "info",
+            title: @Localizer["Attn"],
+            text: @Localizer["Warn2"]
+        });
+    }
+
+    //$('#ModalSave').click(function () {
+    //    const pass = document.getElementById("newPass");
+
+    //    if (!pass.checkValidity()) {
+    //        Swal.fire({
+    //            icon: "error",
+    //            title: "Что-то не так с паролем...",
+    //            text: "Пароль должен быть не менее 6 символов, состоящих из латинских букв и цифр!"
+    //        });
+    //    } else {
+    //        alert('vse verno');
+    //    }
+    //});
+
+
+    function saveButton(e) {
+
+        // ВАЛИДАЦИЯ ПАРОЛЯ (НЕ МЕНЕЕ 6 СИМВОЛОВ, СОСТОЯЩИХ ИЗ ЛАТИНСКИХ БУКВ И ЦИФР)
+        const pass = document.getElementById("newPass");
+
+        if (!pass.checkValidity()) {
+            Swal.fire({
+                icon: "error",
+                title: "@Localizer["PassWrong"]",
+                text: "@Localizer["Warn3"]"
+            });
+        } else {
+            var viewbags = "@ViewBag.OldPass"; // старый пароль пользователя
+
+            var oldpass = $('<textarea />').html(viewbags).text();
+
+            var oldpassword = $('#oldPass').val(); // введенный пароль в графу "Старый пароль"
+
+            if (oldpass != oldpassword) {
+
+                /*e.preventDefault();*/ // запрещаем обновлять страницу
+
+                Swal.fire({
+                    icon: "error",
+                    title: "@Localizer["AllWrong"]",
+                    text: "@Localizer["Check"]"
+                });
+
+                event.preventDefault();
+
+
+            }
+            else {
+
+                $.ajax({
+                    url: '/Account/ChangePassword',
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    data: JSON.stringify($("#newPass").val() + '-' + @Model.Id),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        Swal.fire({
+                            icon: "success",
+                            title: "Успешно!",
+                            text: "Пароль сменен"
+                        });
+
+                        $('#oldPass').val('');
+                        $('#newPass').val('');
+                        $('#confirmedPass').val('');
+
+                        setTimeout(closeModal("#passchange"), 500);
+
+                        // МОЖНО ОСТАВИТЬ ТАК, НО СТРАНИЦА НЕ ПЕРЕЗАГРУЖАЕТСЯ => ОПЯТЬ ПОМЕНЯТЬ ПАРОЛЬ НЕ ПОЛУЧИТСЯ
+                        // ТОЛЬКО ЕСЛИ ПОСЛЕ ОБНОВЛЕНИЯ СТРАНИЦЫ
+                        //setTimeout(location.reload(), 5000);
+
+
+                        //setTimeout(location.reload(), 2000);
+                        return false;
+
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: "error",
+                            title: "@Localizer["AllWrong"]",
+                            text: "@Localizer["WongData"]"
+                        });
+                    }
+                });
+            }
+        }
+
+    }
+
+    function closeModal(name) {
+
+        $(name).modal('hide');
+        $(name).hide();
+        $('.modal-backdrop').hide();
+        $("body").removeClass("modal-open");
+
+
+    }
+</script>

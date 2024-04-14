@@ -1,0 +1,15 @@
+Particles Dynamics. Program version 4
+Number of particles = 134280
+Diffusion coefficient_1 = 2.16705e-13 m^2/s
+Diffusion displacement_1 = 6.58339e-09 m
+Number of particles_1 = 14920
+radius of particles_1 = 1e-06
+Diffusion coefficient_2 = 4.33411e-13 m^2/s
+Diffusion displacement_2 = 9.31032e-09 m
+Number of particles_2 = 119360
+radius of particles_2 = 5e-07
+number of time steps = 1570400
+eta = 0.001
+Temp = 296
+t_max = 157.04
+Execution time: 25.4725 hours

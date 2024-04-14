@@ -1,0 +1,38 @@
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h3>Ваши файлы</h3>
+<form method="get">
+    <div class="form-inline form-group">
+        <input name="name" class="form-control" />
+
+        <input type="submit" value="Искать" class="btn btn-default" />
+    </div>
+</form>
+<table class="table">
+    <tr><th>Название</th><th> <a> Дата создания </a> </th><th> Размер </th><th> Действия </th></tr>
+    @foreach (string file in ViewBag.Infos)
+    {
+        <tr>
+            <td>@file.Substring(0, file.IndexOf(' ')) </td>
+            <td>@file.Substring(file.IndexOf(' ') + 1, 10) </td>
+            <td>@file.Substring(file.LastIndexOf(' ') + 1) </td>
+            <td>
+                    <a asp-action="ReadFile" asp-route-path="" method="post">
+                        Посмотреть
+                    </a> |
+                    <a asp-action="DeleteConfirmed" asp-route-path="@file.Substring(@file.IndexOf('C'), (@file.LastIndexOf(' ') - @file.IndexOf('C')))" method="post">
+                        Удалить
+                    </a>
+
+            </td>
+        </tr>
+    }
+</table>
+
+<form asp-action="AddFile" asp-controller="User" method="post" enctype="multipart/form-data">
+    <input type="file" name="uploadedFile" class="btn btn-light" /><br>
+    <input type="submit" value="Загрузить" class="btn btn-light" />
+</form>

@@ -1,0 +1,3375 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@model diploma.Models.Method
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Методы";
+}
+<head>
+    <meta charset="utf-8">  <!-- задаем кодировку документа UTF-8 -->
+    <link rel="stylesheet" href="/css/preloader.css">
+</head>
+<body>
+    <style>
+
+        .dropdown-contents {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-contents a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-contents a:hover {
+            background-color: #f1f1f1
+        }
+
+        .dropdowns:hover .dropdown-contents {
+            display: block;
+        }
+
+        .dropdowns:hover #dropbtn {
+            background-color: #3e8e41;
+        }
+
+        .block__title {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .block__title:before,
+        .block__title:after {
+            content: '',
+        }
+
+        .block__title:before {
+            transform: rotate(40deg);
+        }
+
+        .block__title:after {
+            transform: rotate(40deg);
+        }
+
+        .block__text {
+            display: none;
+        }
+
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #0f0f0f;
+            display: block;
+        }
+
+            .sidenav a:hover {
+                color: #1a1919;
+            }
+
+        .sidenav {
+            height: 911px;
+            width: 436px;
+            position: fixed;
+            z-index: 1;
+            top: 72px;
+            left: 0;
+            background-color: #f6f6f6;
+            color: black;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .form-group {
+            margin-left: 0px; /* Same as the width of the sidenav */
+            padding: 0px 10px;
+        }
+
+        .vorContainer {
+            display: flex;
+        }
+
+        .vorContainer div {
+            font-size: 30px;
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+        .no-border {
+            border: 0 !important;
+        }
+
+        .swal-size-sm {
+            width: 300px !important;
+        }
+
+        #borders {
+            border: 1px solid #adb5bd; /* Параметры рамки */
+            padding: 5px; /* Поля вокруг текста */
+            margin-bottom: 5px; /* Отступ снизу */
+            border-radius: 12px;
+            width: 98%; /* Ширина слоя */
+            background: #dee2e67d; /* Цвет фона */
+            margin-left: 10px;
+            height: 158px;
+        }
+
+        #bordersInput {
+            border: 1px solid #adb5bd; /* Параметры рамки */
+            padding: 5px; /* Поля вокруг текста */
+            margin-bottom: 5px; /* Отступ снизу */
+            border-radius: 12px;
+            width: 543px;
+            height: 165px;
+            margin-top: -15px;
+            min-width: 500px;
+        }
+
+        #bordersFiles {
+            border: 1px solid #adb5bd; /* Параметры рамки */
+            padding: 5px; /* Поля вокруг текста */
+            margin-bottom: 5px; /* Отступ снизу */
+            border-radius: 12px;
+            width: 356px;
+            height: 170px;
+            margin-top: -15px;
+            min-width: 356px;
+            margin-right: 10px;
+        }
+
+        #bordersDB {
+            border: 1px solid #adb5bd; /* Параметры рамки */
+            padding: 5px; /* Поля вокруг текста */
+            margin-bottom: 5px; /* Отступ снизу */
+            border-radius: 12px;
+            width: 543px;
+            height: 165px;
+            margin-top: -15px;
+            min-width: 500px;
+        }
+
+        #bordersResult {
+            border: 1px solid #adb5bd; /* Параметры рамки */
+            padding: 5px; /* Поля вокруг текста */
+            margin-bottom: 5px; /* Отступ снизу */
+            border-radius: 12px;
+            width: 531px;
+            height: 258px;
+            margin-top: -15px;
+            margin-left: 15px;
+            margin-top: -110px;
+        }
+
+        .c-button {
+            border: 2px solid transparent;
+            /* другие стили */
+            background: transparent;
+            /*color: #ffffff;*/
+            border-color: #000000;
+            height: 40px;
+            width: 128px;
+        }
+    </style>
+
+
+    <h2 style="margin-left: 0px; padding: 0px 10px; font-family: 'Gill Sans', sans-serif; "> <img src="~/images/method.png" style="width: 40px; height: 40px; margin-bottom: 7px;" /> @Localizer["Title"] </h2>
+
+    <!-- Информационное окно -->
+    <div id="borders">
+        <div class="content" style="font-family: 'Gill Sans', sans-serif; margin-left: 10px;">
+            @Localizer["InstructionTitle"] &#129300;  <br />
+            @Localizer["Instruction1"] &#128195; <br />
+            @Localizer["Instruction2"] &#128229; <br />
+            @Localizer["Instruction3"] &#10071; <br />
+            @Localizer["Instruction4"] &#9654; <br />
+            @Localizer["Instruction5"] 	&#9989;
+        </div>
+    </div>
+
+    <div class="alert alert-info alert-dismissable" id="alertMSD" style="display: none; margin-left: 10px; width: 98%; margin-bottom: 5px;">
+        <a class="panel-close close" data-dismiss="alert">×</a>
+        <i class="fa fa-coffee"></i>
+        @Localizer["MSD1"]
+        <label>
+
+
+            <a class="info" href="#" data-toggle="popover" data-placement="right" data-content="@Localizer["MSD2"]"
+               title="" data-original-title="@Localizer["MSDInst"]">
+                @Localizer["MSDArchive"]
+            </a>
+
+            <a href="#" class="example"> (@Localizer["MSD3"]) </a>
+
+        </label> <br />
+        <a style="color: red;"> @Localizer["AttnMSD"] </a>
+    </div>
+
+    <div class="alert alert-info alert-dismissable" id="alertS4" style="display: none; margin-left: 10px; width: 98%; margin-bottom: 5px;">
+        <a class="panel-close close" data-dismiss="alert">×</a>
+        <i class="fa fa-coffee"></i>
+
+        @Localizer["S41"]
+
+        <label>
+
+            <a class="info" href="#" data-toggle="popover" data-placement="right" data-content="@Localizer["S42"]"
+               title="" data-original-title="@Localizer["MSDInst"]">
+                @Localizer["S43"]
+            </a>
+
+            <a href="#" class="example"> (@Localizer["MSD3"]) </a>
+
+        </label> <br />
+        <a style="color: red;"> @Localizer["AttnMSD"] </a>
+    </div>
+
+    <div class="alert alert-info alert-dismissable" id="alertNOP" style="display: none; margin-left: 10px; width: 98%; margin-bottom: 5px;">
+        <a class="panel-close close" data-dismiss="alert" >×</a>
+        <i class="fa fa-coffee"></i>
+
+        @Localizer["NOP1"]
+
+        <label>
+
+            <a class="info" href="#" data-toggle="popover" data-placement="right" data-content="@Localizer["NOP2"]"
+               title="" data-original-title="@Localizer["MSDInst"]">
+                @Localizer["NOP3"]
+            </a>
+
+            <a href="#" class="example"> (@Localizer["MSD3"]) </a>
+
+        </label> <br />
+        <a style="color: red;"> @Localizer["AttnMSD"] </a>
+    </div>
+
+    <div id="alertGraph" class="alert alert-info alert-dismissable" style="display: none; margin-left: 10px; width: 1086px; font-family: 'Gill Sans', sans-serif;">
+        <a class="panel-close close" data-dismiss="alert">×</a>
+        <i class="fa fa-coffee"></i>
+        @Localizer["Graph1"] <br />
+        @Localizer["Graph2"] <br />
+
+        <a href="#" data-toggle="modal" data-target="#inputVor1" style="font-family: 'Gill Sans', sans-serif;"> @Localizer["GraphStr"] </a>
+    </div>
+
+    <div id="alertCirc" class="alert alert-info alert-dismissable" style="display: none; margin-left: 10px; width: 1087px; margin-bottom: 10px; font-family: 'Gill Sans', sans-serif; ">
+        <a class="panel-close close" data-dismiss="alert">×</a>
+        <i class="fa fa-coffee"></i>
+        @Localizer["Graph1"] <br />
+        @Localizer["Circ1"] <br />
+
+        <p style="color: #b44545; font-family: 'Gill Sans', sans-serif;"> @Localizer["Circ2"] </p>
+    </div>
+
+    <!-- preloader -->
+    <div id="preloader" class="load" style="display: none;">
+        <hr /><hr /><hr /><hr />
+    </div>
+
+    <div class="form-group">
+        <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+
+
+        <select id="selected" asp-for="Id"
+                class="form-control"
+                asp-items="@(new SelectList(ViewBag.Methods,"Value", "Text"))" onchange="i()" style="min-width: 500px; margin-bottom: 10px; font-family: 'Gill Sans', sans-serif; width: 50%;">
+            <option value="" disabled selected> @Localizer["MethodChoose"] </option>
+        </select>
+
+        <!-- нужно?? -->
+        <select id="dirselected" class="form-control" onchange="checkDir()" style="display: none; min-width: 500px; margin-bottom: 10px; font-family: 'Gill Sans', sans-serif; width: 50%;">
+            <option value="" disabled selected> Выберите размерность </option>
+            <option value="1D"> Одномерный </option>
+            <option value="2D"> Двумерных </option>
+            <option value="3D"> Трехмерный </option>
+        </select>
+
+        <select id="dataselected" class="form-control" style="display: none; position: relative; min-width: 500px; font-family: 'Gill Sans', sans-serif; width: 50%;" onchange="j()">
+            <option value="" disabled selected> @Localizer["SourceChoose"] </option>
+            <option value="inputs"> @Localizer["Source1"] </option>
+            <option value="file"> @Localizer["Source2"] </option>
+            <option value="database"> @Localizer["Source3"] </option>
+        </select>
+
+        <!-- select для выбора статуса частиц -->
+        <select id="statuselected" class="form-control" style="display: none; position: relative; min-width: 500px; font-family: 'Gill Sans', sans-serif; width: 50%; margin-top: 10px;" onchange="statusSelect()">
+            <option value="" disabled selected> Выберите изолированную частицц </option>
+            <option value="inputs"> Большая </option>
+            <option value="file"> Маленькая </option>
+        </select>
+
+        <p id="par" style="display: none; position: relative; top: 10px;"> <b> @Localizer["InputParameters"] </b></p>
+
+        <div class="container" style="display: inline-block; min-width: 500px;">
+
+            <input name="methodId" type="number" id="methodId" style="display: none; position: relative; width: 80px; top: 8px; right: 114px; " readonly="readonly" class="form-control">
+
+            <input type="image" src="/images/clear_button.png" id="clear2" style="width: 30px; height: 30px; position: relative; top: 15px; right: 18px; display: none; margin-left: 15px;" />
+
+        </div>
+
+        <div class="container" id="chooseCirc" style="display: none; margin-left: -15px;">
+            <div class="d-flex align-items-baseline" style="margin-top: -33px;">
+                <button data-toggle="modal" data-target="#circModal" class="btn btn-outline-secondary" style="margin-top: 10px;" id="circChoose"> @Localizer["SelectFile"] </button>
+                <p id="circLabel" style="margin-left: 10px; "> @Localizer["NoFile"] </p>
+                <p id="circRemove" style="display: none; margin-left: 10px;">
+                    <a>
+                        <img src="~/images/remove.png" width="15"
+                             height="15" alt="remove">
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="container" id="chooseCont1" style="display: none; margin-left: -15px;">
+            <div class="d-flex align-items-baseline" style="margin-top: -33px;">
+                <button data-toggle="modal" data-target="#cfgModal" class="btn btn-outline-secondary" style="margin-top: 10px;" id="cfgChoose"> @Localizer["SelectConfFile"] </button>
+                <p id="cfgLabel" style="margin-left: 10px; "> @Localizer["NoFile"] </p>
+                <p id="cfgRemove" style="display: none; margin-left: 10px;">
+                    <a>
+                        <img src="~/images/remove.png" width="15"
+                             height="15" alt="remove">
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="container" id="chooseCont2" style="display: none; margin-left: -15px; margin-top: -10px;">
+            <div class="d-flex align-items-baseline">
+                <button data-toggle="modal" data-target="#coorModal" class="btn btn-outline-secondary" style="margin-top: 10px;" id="coorChoose"> @Localizer["SelectCoordFile"] </button>
+                <p id="coorLabel" style="margin-left: 10px; "> @Localizer["NoFile"] </p>
+                <p id="coorRemove" style="display: none; margin-left: 10px;">
+                    <a>
+                        <img src="~/images/remove.png" width="15"
+                             height="15" alt="remove">
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="container" id="chooseZIP" style="display: none; margin-left: -15px; margin-top: -20px;">
+            <div class="d-flex align-items-baseline">
+                <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#zipModal" style="margin-top: -4px;" id="zipChoose"> @Localizer["SelectArchive"] </button>
+                <p id="zipLabel" style="margin-left: 10px;"> @Localizer["NoFile"] </p>
+                <p id="zipRemove" style="display:none; margin-left: 10px;">
+                    <a href="#">
+                        <img src="~/images/remove.png" width="15"
+                             height="15" alt="remove">
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <!-- выбор какие частицы сгенерировать  -->
+        <div class="container" id="particlesGenerate" style="display: none; margin-left: -15px; margin-top: -10px;">
+            <div class="d-flex align-items-baseline">
+                <fieldset id="partType" style="margin-right: 10px; flex: 1;">
+                    <legend> @Localizer["GenerationType"] </legend>
+                    <div>
+                        <input type="radio"
+                               id="order"
+                               name="type"
+                               value="order"
+                               checked />
+                        <label for="contactChoice1"> @Localizer["GenerateOrder"] </label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="chaos" name="type" value="chaos" checked />
+                        <label for="contactChoice2"> @Localizer["GenerateChaos"] </label>
+                    </div>
+                </fieldset>
+
+                <fieldset id="partStatus" style="flex: 3;">
+                    <legend> @Localizer["IsolatedParticle"] </legend>
+                    <div>
+                        <input type="radio"
+                               id="L"
+                               name="status"
+                               value="L"
+                               checked />
+                        <label for="contactChoice1"> @Localizer["Large"] </label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="S" name="status" value="S" />
+                        <label for="contactChoice2"> @Localizer["Small"] </label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <!-- Форма ввода количества генерируемых частиц и кнопка генерации -->
+        <div class="container" id="particlesNum" style="display: none; margin-left: -15px; margin-top: 15px;">
+            <div class="d-flex align-items-baseline">
+                <label style="font-size: 20px;"> @Localizer["ParticlesNum"] </label>
+                <input id="num_particles" type="number" min="0" style="margin-left: 10px; width: 125px;" class="form-control" />
+
+                <div style="flex: 3;">
+                    <button class="btn btn-outline-secondary" id="genButton" style="margin-left: 10px; margin-top: -5px; width: 35%;"> @Localizer["Generate"] </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="custom-control custom-switch" id="autoBorders" style="display: none; margin-bottom: 10px; margin-top: 10px;">
+            <input type="checkbox" class="custom-control-input" id="autoBrdrs">
+            <label class="custom-control-label" for="autoBrdrs"> Автоматически высчитать границы </label>
+        </div>
+
+        <div class="container" style="display: none; margin-left: -15px;" id="border">
+            <div class="d-flex align-items-baseline">
+                <label for="borderLeft"> @Localizer["From"] </label>
+                <input id="borderLeft" type="number" min="0" max="1" style="margin-left: 10px; width: 100px;" class="form-control" />
+
+                <label for="borderRight" style="margin-left: 10px; margin-right: 10px;"> @Localizer["To"] </label>
+                <input type="number" id="borderRight" min="0" max="1" style="margin-right: 10px; width: 100px;" class="form-control" />
+
+                <label for="w" style="margin-right: 10px;"> @Localizer["RingsNum"] </label>
+                <input type="number" id="Nring" min="1" style="margin-right: 10px; width: 100px;" class="form-control" />
+            </div>
+        </div>
+
+        <div class="custom-control custom-switch" id="checkSEM" style="display: none; margin-bottom: 10px; margin-top: 10px;">
+            <input type="checkbox" class="custom-control-input" id="SEM">
+            <label class="custom-control-label" for="SEM"> @Localizer["SEM"] </label>
+        </div>
+
+        <!-- не нужно? -->
+        <div class="custom-control custom-switch" id="checkGraphic" style="display: none; margin-bottom: 10px;">
+            <input type="checkbox" class="custom-control-input" id="graphic">
+            <label class="custom-control-label" for="graphic"> Построить график </label>
+        </div>
+
+
+        <div class="dropdowns" id="MSDSave" style="display: none;">
+            <div class="dropdown-contents">
+                @foreach (string dir in ViewBag.Dirs)
+                {
+                    <div class="dropdown">
+                        <a data-toggle="dropdown" aria-expanded="false" class="filedown-item" name="@dir">
+                            <img src="~/images/folder_icon.png" style="width: 30px; height: 30px;"> @dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="container" id="circButton" style="display: none; margin-bottom: -30px; margin-left: -15px;">
+
+            <div class="d-flex align-items-baseline">
+                <button class="btn btn-outline-secondary" id="otherCircButton" disabled> @Localizer["Start"] </button>
+
+                <div class="dropdowns">
+                    <div class="dropdown-contents">
+                        @foreach (string dir in ViewBag.Dirs)
+                        {
+                            <div class="dropdown">
+                                <a data-toggle="dropdown" aria-expanded="false" class="filedown-item" name="@dir">
+                                    <img src="~/images/folder_icon.png" style="width: 30px; height: 30px;"> @dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="container" id="vorButton" style="display: none; margin-bottom: -30px; margin-left: -15px;">
+
+            <div class="d-flex align-items-baseline">
+                <button class="btn btn-outline-secondary" id="otherButton" style="margin-bottom: 15px;" disabled> @Localizer["Start"] </button>
+
+                <div class="dropdowns">
+                    <button id="dropbtn" class="btn btn-outline-success" style="margin-bottom: 3px; margin-left:5px; display: none;"> @Localizer["Save"] </button>
+                    <div class="dropdown-contents">
+                        @foreach (string dir in ViewBag.Dirs)
+                        {
+                            <div class="dropdown">
+                                <a data-toggle="dropdown" aria-expanded="false" class="filedown-item" name="@dir.Substring(7)">
+                                    <img src="~/images/folder_icon.png" style="width: 30px; height: 30px;"> @dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="result" style="display: none;">
+
+        </div>
+
+        <div class="container" style="display: flex;">
+            <div class="item">
+                <div class="containerInput" style="display: flex; margin-left: -15px;">
+
+                    <div class="itemInput">
+
+                        <!-- Информационное окно для файлов ввода-->
+                        <div id="bordersFiles" style="display: none; ">
+                            <div class="content" style="font-family: 'Gill Sans', sans-serif; margin-top: 20px;">
+
+                                <!-- 1004 && 1005 -->
+                                <input name="N" type="number" placeholder="@Localizer["Method1Par1"]" id="N" style="display: none; position: relative; width: auto; width: 323px; margin-left: 10px; " class="form-control" readonly="readonly">
+
+                                <input name="edges" type="text" placeholder="@Localizer["Method1Par2"]" id="edges" style="display: none; position: relative; width: 323px; top: 8px; margin-left: 10px; " class="form-control" readonly="readonly">
+
+                                <input name="OneSj" type="text" placeholder="@Localizer["Method1Par3"]" id="OneSj" style="display: none; position: relative; width: 323px; top: 8px; margin-left: 10px; " class="form-control" readonly="readonly">
+
+                                <!-- 4003 -->
+                                @*<input name="P" type="number" placeholder="Периметр ромба" id="p" style="display: none; position: relative; width: 323px; top: 8px; margin-left: 10px;" class="form-control" readonly="readonly">
+
+                                <input name="A" type="number" placeholder="Площадб ромба" id="A" style="display: none; position: relative; width: 323px; top: 8px; margin-left: 10px;" class="form-control" readonly="readonly">*@
+
+                                <!-- 4003 -->
+                                <input name="P" type="number" placeholder="@Localizer["Method1Par4"]" id="p" style="display: none; position: relative; width: 323px; margin-left: 10px;" class="form-control" readonly="readonly">
+
+                                <input name="A" type="number" placeholder="@Localizer["Method1Par5"]" id="A" style="display: none; position: relative; width: 323px; top: 8px; margin-left: 10px;" class="form-control" readonly="readonly">
+
+                                <input type="submit" id="button" value="@Localizer["Start"]" class="btn btn-outline-secondary" style="display: none; position: relative; top: 13px; width: 323px; margin-left: 10px; " />
+
+                            </div>
+                        </div>
+
+                        <!-- Информационное окно для ручного ввода-->
+                        <div id="bordersInput" style="display: none; ">
+                            <div class="content" style="font-family: 'Gill Sans', sans-serif; margin-top: 20px;">
+                                <input name="N" type="number" placeholder="Количество соседей" id="show" style="display: none; position: relative; width: auto; bottom: 10px; width: 488px; margin-left: 20px;" class="form-control">
+
+                                <input name="edges" type="text" placeholder="@Localizer["Method1Par2"]" id="show1" onclick="Swal.fire('Внимание!', 'Углы вводить без пробелов через запятую', 'info');" style="display: none; position: relative; width: 488px; bottom: 10px; margin-top: 7px; margin-left: 20px;" class="form-control">
+
+                                <input name="TwoSj" type="text" placeholder="@Localizer["Method1Par3"]" id="TwoSj" onclick="Swal.fire('Внимание!', 'Расстояния вводить без пробелов через запятую', 'info');" style="display: none; position: relative; width: 488px; bottom: 10px; margin-top: 7px; margin-left: 20px;" class="form-control">
+
+                                <!-- 4003 -->
+                                <input type="number" placeholder="@Localizer["Method1Par4"]" id="handP" style="display: none; position: relative; bottom: 10px; width: 488px; margin-left: 20px;" class="form-control"> <!-- входные параметры P -->
+
+                                <input type="number" placeholder="Localizer[" Method1Par5"]" id="handA" style="display: none; position: relative; bottom: 10px; width: 488px; margin-left: 20px; margin-top: 7px;" class="form-control"> <!-- входные параметры А -->
+
+                                <input type="image" src="/images/clear_button.png" id="clear" style="width: 30px; height: 30px; position: relative; top: -3px; right: 3px; display: none; margin-left: 15px;" /> <!-- очистка -->
+
+                                <input type="submit" id="but" value="@Localizer["Start"]" class="btn btn-outline-secondary" style="display: none; position: relative; margin-left: 20px; width: 488px; left: auto; " /> <!-- Запуск -->
+                            </div>
+                        </div>
+
+                        <!-- Информационное окно для ввода из БД-->
+                        <div id="bordersDB" style="display: none; ">
+                            <div class="content" style="font-family: 'Gill Sans', sans-serif; margin-top: 20px;">
+                                <input name="N" type="number" placeholder="Количество соседей" id="NDB" style="display: none; position: relative; width: auto; width: 488px; margin-left: 20px; " class="form-control" readonly="readonly">
+
+                                <input name="edges" type="text" placeholder="@Localizer["Method1Par2"]" id="edgesDB" style="display: none; position: relative; width: 488px; top: 8px; margin-left: 20px; " class="form-control" readonly="readonly">
+
+                                <input name="OneSj" type="text" placeholder="@Localizer["Method1Par3"]" id="OneSjDB" style="display: none; position: relative; width: 488px; top: 8px; margin-left: 20px; " class="form-control" readonly="readonly">
+
+                                <!-- 4003 -->
+                                @*<input name="P" type="number" placeholder="Периметр ромба" id="p" style="display: none; position: relative; width: 323px; top: 8px; margin-left: 10px;" class="form-control" readonly="readonly">
+
+                                <input name="A" type="number" placeholder="Площадб ромба" id="A" style="display: none; position: relative; width: 323px; top: 8px; margin-left: 10px;" class="form-control" readonly="readonly">*@
+
+                                <!-- 4003 -->
+                                <input name="P" type="number" placeholder="@Localizer["Method1Par4"]" id="pDB" style="display: none; position: relative; width: 488px; margin-left: 20px;" class="form-control" readonly="readonly">
+
+                                <input name="A" type="number" placeholder="@Localizer["Method1Par5"]" id="ADB" style="display: none; position: relative; width: 488px; top: 8px; margin-left: 20px;" class="form-control" readonly="readonly">
+
+                                <input type="submit" id="buttonDB" value="@Localizer["Start"]" class="btn btn-outline-secondary" style="display: none; position: relative; top: 13px; width: 488px; margin-left: 20px; " />
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="item">
+                <div id="nav" style="display: none; position: relative;">
+
+                    @if (ViewBag.Count <= 0)
+                    {
+                        <p style="color: gray; padding-left: 10px; padding-top: 10px; font-size: 18px;"> @Localizer["DirNoFIle"] </p>
+                    }
+                    else
+                    {
+                        <!-- Вывод для выбора параметров из файла -->
+                        @foreach (string dir in ViewBag.Dirs)
+                        {
+                            <div class="dropdown">
+                                <a data-toggle="dropdown" aria-expanded="false">
+                                    <img src="~/images/folder_icon.png" style="width: 30px; height: 30px;"> @dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)
+                                </a>
+                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+                                    @foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<string>> t in ViewBag.Files)
+                                    {
+                                        @foreach (string g in t.Value)
+                                        {
+                                            @if (t.Key.Equals(@dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)))
+                                            {
+                                                <a class="dropdown-item" name="@g"> <img src="~/images/file_icon.png" style="width: 25px; height: 25px;"> @g.Substring(g.LastIndexOf("\\") + 1).Replace("_" + User.Identity.Name, "") </a>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="itemInput">
+                    <div id="bordersResult" style="display: none; ">
+                        <div class="content" style="font-family: 'Gill Sans', sans-serif; margin-top: 20px; text-align: center;">
+                            <img src="~/images/check.png" style="width: 80px; height:80px;" />
+
+                            <p style="font-size: 22px; margin-top: 10px; "> @Localizer["ResultSuccess"] </p>
+                            <p id="resultInput" style="font-size: 22px; "> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="partStatusNogen" style="display: none; margin-left: 86px;">
+                <fieldset id="particleStatus">
+                    <legend> @Localizer["IsolatedParticle"] </legend>
+                    <div>
+                        <input type="radio"
+                               id="L"
+                               name="status"
+                               value="L" />
+                        <label for="contactChoice1"> @Localizer["Large"] </label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="S" name="status" value="S" />
+                        <label for="contactChoice2"> @Localizer["Small"] </label>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="item">
+                <p id="labelWithoutStatus" style="margin-left: 50px; display: none;">  </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container" id="subarea" style="display: none; margin-top: 15px;">
+        <div class="d-flex align-items-baseline">
+            <label style="font-size: 20px;"> @Localizer["SubfieldNum"] </label>
+            <input id="num_subarea" type="number" min="0" style="margin-left: 10px; width: 125px;" class="form-control" disabled/>
+        </div>
+    </div>
+
+    <button id="goIS" class="btn btn-outline-secondary" style="display: none; margin-top: 10px; width: 50%; margin-bottom: 10px; margin-left: 10px;" disabled> @Localizer["Start"] </button>
+
+    <div class="container" style="display: flex; margin-bottom: 10px;">
+        <div class="item">
+            <button id="otherMSDButton" class="btn btn-outline-secondary" style="display: none; margin-left: -15px;" disabled> @Localizer["Start"] </button>
+        </div>
+
+        <div class="item">
+            <button id="MSDtxt" class="c-button" style="display: none; border-radius: 5px; width: 127px; align-items: center;"> @Localizer["Download"] </button>
+        </div>
+
+        <div class="item">
+            <div class="dropdowns">
+                <button id="dropbtnMSD" class="btn btn-outline-success" style="margin-bottom: 3px; margin-left:5px; display: none;"> @Localizer["Save"] </button>
+                <div class="dropdown-contents">
+                    @foreach (string dir in ViewBag.Dirs)
+                    {
+                        <div class="dropdown">
+                            <a data-toggle="dropdown" aria-expanded="false" class="filedown-item" name="@dir.Substring(7)">
+                                <img src="~/images/folder_icon.png" style="width: 30px; height: 30px;"> @dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <h2 id="labelGraph" style="display: none; padding-left: 10px;"> График </h2>
+    <img id="img_1" style="display:none; margin-top: 40px;" src="/graphs/my_plot.png">
+
+
+    <div class="wrapper" id="wrapperTest" style="display: none;">
+        <div class="block">
+            <div class="block__item">
+                <h2 class="block__title" style="margin-left: 10px; margin-top: 35px; font-family: 'Gill Sans', sans-serif;">
+                    <img src="~/images/down.png" style="width:40px; height: 40px;" /> @Localizer["PassPart"]
+                </h2>
+                <div class="block__text" style="margin-left: 10px;">
+                    <button id="img_2" target="_blank" onclick="window.location.href = 'https://www.google.com';" class="c-button" style="margin-left: 10px; border-radius: 30px; width: 255px;"> @Localizer["OpenPic"] </button>
+                    <button id="img_4" class="c-button" style="margin-bottom: 3px; margin-left: 5px; border-radius: 30px; width: 255px;"> @Localizer["DownData"] </button>
+                    <input type="image" data-toggle="modal" data-target="#dataHelper" style="width:30px; height: 30px; margin-bottom: -8px;" src="/images/infoButton.png" alt="@Localizer["MSDInst"]">
+                </div>
+
+                <h2 class="block__title" style="margin-left: 10px; margin-top: 35px; font-family: 'Gill Sans', sans-serif;">
+                    <img src="~/images/down.png" style="width:40px; height: 40px;" /> @Localizer["Graphic"]
+                </h2>
+                <div class="block__text" style="margin-left: 10px;">
+                    <img id="img_3" src="/graphs/my_plot.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Отображение графика MSD -->
+    <div class="container">
+        <div class="d-flex align-items-center">
+            <div class="item">
+                <h2 id="SEMGraphic" style="display: none; font-family: 'Gill Sans', sans-serif;"> @Localizer["Graphic"] </h2>
+                <img id="imgMSD" style="display: none;" src="/SEM.png" />
+            </div>
+
+            <div class="item">
+                <img id="imgHeatMap" style="display: none;" src="/SEM.png" />
+            </div>
+        </div>
+    </div>
+
+    <h2 id="circTextLabel" style="display: none; margin-left: 10px; margin-top: 35px; font-family: 'Gill Sans', sans-serif;"> @Localizer["DetectedPart"] </h2>
+
+
+    <!-- Модальное окно информации о данных по частицам -->
+    <div id="dataHelper" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> @Localizer["InfPart"] </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p> @Localizer["Data1"] </p>
+                    <p> @Localizer["Data2"] </p>
+
+                    <p style="text-align: center;"><img style="width: 420px; height: 450px;" src="~/images/particlesData.png"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно информации о виде входных файлов метода диаграммы Вороного (5003) log.txt -->
+    <div id="inputVor1" class="modal" tabindex="-1" role="dialog" onclick="HideModal()">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> @Localizer["VorConf"]  </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p> @Localizer["VorConf2"] </p>
+
+                    <p style="text-align: center;"><img style="width: 420px; height: 450px;" src="~/images/cfg.png"></p>
+
+                    <p> @Localizer["VorConf3"] <b> @Localizer["VorConf4"] </b> </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#inputVor2" data-dismiss="modal"> @Localizer["Next"] </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно информации о виде входных файлов метода диаграммы Вороного (5003) coordinates.txt -->
+    <div id="inputVor2" class="modal" tabindex="-1" role="dialog" onclick="HideModal()">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> @Localizer["CoorConf"]  </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <p> @Localizer["VorCoor1"] </p>
+
+                    <p style="text-align: center;"><img style="width: 420px; height: 450px;" src="~/images/coordinates.png"></p>
+
+                    <p> <em> @Localizer["VorCoor2"] </em> </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> @Localizer["Close"] </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OneTypeMethod -->
+    <div id="AddLenModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> @Localizer["AddForm"] </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" style="display: none;">
+                        <label>@Localizer["MethodID"]</label>
+                        <input id="methID" type="number" class="form-control" readonly="readonly" />
+                    </div>
+                    <div class="form-group" style="display: none;">
+                        <label>@Localizer["UserID"]</label>
+                        <input id="users" type="number" name="userId" class="form-control" value="@ViewBag.User" readonly="readonly" />
+                    </div>
+                    <div class="form-group">
+                        <label>@Localizer["NumNeigh"]</label>
+                        <input id="LenN" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label> @Localizer["Method1Par3"] </label>
+                        <input type="text" id="LenS" class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="Lensubmit" class="btn btn-primary"> @Localizer["Save"] </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> @Localizer["Close"] </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- HELPERS -->
+    <!-- метод IS -->
+    <div id="showIS" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> Параметр ориентационного порядка связи  относительно малой частицы </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <p>
+                        Для анализа угловой однородности параметр ориентационного порядка связи ψ(j)NLS относительно изолированной малой частицы (далее - S-частицы) или
+                        средней точки S-частицы j вычисляется следующим образом:
+                    </p>
+                    <p style="text-align:center;"><img src="~/images/formula_IS.png"></p>
+                    <p>
+                        где фjk– угол между центром изолированной S-частицы (или средней точкой димера, состоящего из S-частицы) j и kой крупной частицей
+                        (далее - L-частицей) из числа ее ближайших соседей (NnnjLS) относительно произвольной фиксированной оси отсчета (Рисунок 1)
+                        , а N — целое число, выбранное в соответствии с конкретной исследуемой симметрией (например, N=3 для оценки угловой однородности в случае изолированной частицы S
+                        между тремя L-частицами и N=4 в случае изолированной S-частицы между четырьмя L-частицами и средней точки димера S-частицы между четырьмя L-частицами).
+                    </p>
+
+                    <p style="text-align: center;"><img src="~/images/pic_IS.png"></p>
+                    <p style="text-align: center;"> Рисунок 1. Угол фjk </p>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Закрыть </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- метод IL -->
+    <div id="showIL" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> Параметр ориентационного порядка связи относительно большой частицы </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <p>
+                        Для исследования угловой однородности вычисляется ориентационный порядок связи относительно L-частицы, параметр ψ(j)NnnjSL определяется следующим образом:
+                    </p>
+                    <p style="text-align:center;"><img src="~/images/formula_IL.png"></p>
+                    <p>
+                        где фjk – угол между центром L-частицы j и kой S-частицей из числа ее ближайших соседей (NnnjSL) относительно произвольной фиксированной оси отсчета
+                    </p>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Закрыть </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- метод радиальной однородности -->
+    <div id="showRad" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> Параметр оценки радиальной однородности </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <p>
+                        Для оценки радиальной однородности оценивался следующий параметр:
+                    </p>
+                    <p style="text-align:center;"><img src="~/images/formula_rad.png"></p>
+                    <p>
+                        где tjk – расстояние между центром L-частицы j и kой S-частицей из числа ее ближайших соседей (NnnjSL),
+                        tj|– среднее расстояние от центра L-частицы до S-частиц из числа ее ближайших соседей (NnnjSL).
+                    </p>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Закрыть </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- длина связи -->
+    <div id="showLen" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> Длина связи </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <p style="text-align:center;"><img src="~/images/pic_len.png"></p>
+                    <p">
+                        Рисунок 1. Конфигурация L-частиц вокруг S-частиц: а) изолированная S-частица между гексагонально расположенными L-частицами;
+                        b) изолированная S-частица между L-частицами, расположенными в квадратной архитектуре; c) изолированная S-частица между гексагонально расположенными L-частицами;
+                        d) димер, состоящий из S-частиц, между L-частицами, расположенными в ромбической архитектуре; e) частицы S, окруженные частицами L с угловым равномерным и радиально неравномерным распределением (???);
+                        f) частицы S, окруженные частицами L с угловым неравномерным и радиально неравномерным распределением.
+                        </p>
+
+                        <p>
+                            В предыдущих исследованиях, касающихся бинарных сборок суперпарамагнитных частиц, одна из таких конфигураций с потенциалом периодического заполнения пространства,
+                            т.е. изолированная S-частица между четырьмя L-частицами, расположенными в вершинах квадрата, была выделена путем изучения двух разных метрик, т.е. параметра ориентационного
+                            порядка связи ψ(j)4LS и bjNLS, и длиной связи, которая определяется как:
+                        </p>
+
+                        <p style="text-align:center;"><img src="/images/formula_len.png"></p>
+
+                        <p>
+                            где ljk – расстояние между S-частицей j и соседней L-частицей k, lj| – среднее расстояние между S-частицей j и четырьмя соседними L-частицами, также N=4 для квадратной архитектуры.
+                            Для идеальной квадратной архитектуры |ψ(j)4LS|=1 и bj4LS = 0.
+                        </p>
+
+                        <p>
+                            В данном случае была разработана обобщенная процедура для идентификации всех различных конфигураций частиц.
+                            Такая процедура основана на анализе угловой и радиальной однородности L-частиц вокруг изолированной S-частицы или вокруг средней точки димера,
+                            состоящего из частиц S. Во-первых, количество ближайших соседей L определяется с помощью тесселяции Вороного/триангуляции Делоне.
+                            Затем для изолированных S-частиц и средних точек димеров, состоящих из частиц S, расположенных внутри выпуклых многоугольников, имеющих в качестве вершин три или четыре соседних частицы L,
+                            тщательно исследуют угловое и радиальное распределение соседей L-частиц относительно изолированной S-частицы или средней точки димера, состоящего из S-частиц. Цель исследования состоит в том,
+                            чтобы проверить, соответствуют ли они конкретным условиям, удовлетворяемым идеальным параметрам архитектур (как на примере квадратной архитектуры), которые мы ищем.
+                        </p>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Закрыть </button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- коэффициент формы -->
+    <div id="showForm" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> Коэфициент формы </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <p>
+                        В дополнение к выделению ромбических расположений, можно приступить к классификации их угла наклона, чтобы понять,
+                        имеют ли они преимущественно ромбическое или квадратное расположение в зависимости от угла α, показанного на рисунке 1(d)).
+                        С этой целью можно оценить соотношение между диагоналями таких ромбических расположений (в предельном случае вырождающихся в квадраты).
+                        В качестве альтернативы, коэффициенты формы θjLS ромбических компоновок, имеющих в качестве вершин четыре L-частицы и включающих изолированную S-частицу
+                        j или среднюю точку j димера, состоящего из S-частиц, могут быть оценены для определения α. Коэффициент формы θjLS относительно изолированной S-частицы
+                        или средней точки димера j S- частицы может быть записан как:
+                    </p>
+
+                    <p style="text-align:center;"><img src="/images/formula_form.png"></p>
+
+                    <p>
+                        где pjLS и AjLS представляют периметр и площадь ромба, имеющего в вершинах четыре L ближайших соседей к изолированной
+                        S-частице или к средней точке димера j S-частицы. Эти показатели позволяют нам уменьшить угол α ромба и разделить их
+                        на три различных класса, соответственно на 60 ° ≤ α ≤ 67,5°; 67,5° < α < 82,5° и 82,5° ≤ α ≤ 90°.
+                        Первый класс соответствует ромбам, вырождающимся в конфигурацию L-частиц, соответствующую почти гексагональному расположению;
+                        в случае плотно упакованных L-частиц промежуток между четырьмя L-частицами вырождался бы в два отдельных промежутка при α = 60°;
+                        изолированная S-частица при такой конфигурации L-частиц располагалась бы вдоль мостика между двумя соседними L-частицами, т. е. вдоль линии,
+                        соединяющей центры двух контактирующих L-частиц. Второй класс соответствовал бы более ромбическому расположению,
+                        в то время как третий класс - более квадратному расположению.
+                    </p>
+
+                    <p style="text-align:center;"><img src="/images/pic_form.png"></p>
+
+                    <p>
+                        <b> Рисунок 1. </b> Угловая и радиальная однородность четырехугольников и треугольников L-частиц по отношению к изолированным
+                        S-частицам и S-димерам частиц: (а) идентификация изолированных частиц S, вовлеченных в равносторонние треугольники и ромбы,
+                        и димеров частиц S, вовлеченных в ромбы; (b) классификация ромбов вокруг S-частиц и димеров S-частиц в соответствии с углом α;
+                        (c) процентное содержание изолированных частиц S, вовлеченных в равносторонние треугольники и ромбы, и димеров частиц S, вовлеченных в ромбы,
+                        для соотношения числа частиц NS/NL; (d) классы углов ромбов вокруг изолированных частиц S для соотношения числа частиц NS/NL;
+                        (e) классы углов ромбов вокруг димеров частиц S для переменного отношения числа частиц NS/NL.
+                    </p>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Закрыть </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- модальное окно выбора файлов конфигурации из списка -->
+    <div id="cfgModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> Файлы </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container-sm">
+                        <div class="align-self-start">
+                            <div id="cfgnav" style="position: relative; top: 10px; margin-bottom: 35px;">
+
+
+                                @if (ViewBag.Count <= 0)
+                                {
+                                    <p style="color: gray; padding-left: 10px; padding-top: 10px; font-size: 18px;"> @Localizer["DirNoFIle"] </p>
+                                }
+                                else
+                                {
+                                    <!-- Вывод для выбора параметров из файла -->
+                                    @foreach (string dir in ViewBag.Dirs)
+                                    {
+                                        <div class="dropdown">
+                                            <a data-toggle="dropdown" aria-expanded="false">
+                                                <img src="~/images/folder_icon.png" style="width: 30px; height: 30px;"> @dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)
+                                            </a>
+                                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+                                                @foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<string>> t in ViewBag.Files)
+                                                {
+                                                    @foreach (string g in t.Value)
+                                                    {
+                                                        @if (t.Key.Equals(@dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)))
+                                                        {
+                                                            <a class="dropdown-item" name="@g"> <img src="~/images/file_icon.png" style="width: 25px; height: 25px;"> @g.Substring(g.LastIndexOf("\\") + 1).Replace("_" + User.Identity.Name, "") </a>
+                                                        }
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> @Localizer["Close"] </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- модальное окно выбора файлов конфигурации из списка -->
+    <div id="circModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> @Localizer["Files"] </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container-sm">
+                        <div class="align-self-start">
+                            <div id="cfgnav" style="position: relative; top: 10px; margin-bottom: 35px;">
+
+
+                                @if (ViewBag.Count <= 0)
+                                {
+                                    <p style="color: gray; padding-left: 10px; padding-top: 10px; font-size: 18px;"> @Localizer["DirNoFIle"] </p>
+                                }
+                                else
+                                {
+                                    <!-- Вывод для выбора параметров из файла -->
+                                    @foreach (string dir in ViewBag.Dirs)
+                                    {
+                                        <div class="dropdown">
+                                            <a data-toggle="dropdown" aria-expanded="false">
+                                                <img src="~/images/folder_icon.png" style="width: 30px; height: 30px;"> @dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)
+                                            </a>
+                                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+                                                @foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<string>> t in ViewBag.Files)
+                                                {
+                                                    @foreach (string g in t.Value)
+                                                    {
+                                                        @if (t.Key.Equals(@dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)) && ((g.Substring(g.LastIndexOf(".")) == ".png") || (g.Substring(g.LastIndexOf(".")) == ".jpg") || (g.Substring(g.LastIndexOf(".")) == ".jpeg") || (g.Substring(g.LastIndexOf(".")) == ".gif")))
+                                                        {
+                                                            <a class="dropdown-item" name="@g"> <img src="~/images/file_icon.png" style="width: 25px; height: 25px;"> @g.Substring(g.LastIndexOf("\\") + 1).Replace("_" + User.Identity.Name, "") </a>
+                                                        }
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> @Localizer["Close"] </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- модальное окно выбора файлов координат из списка -->
+    <div id="coorModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> @Localizer["Files"] </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container">
+                        <div class="d-flex align-items-center">
+                            <div id="coornav" style="position: relative; top: 10px; margin-bottom: 35px;">
+
+
+                                @if (ViewBag.Count <= 0)
+                                {
+                                    <p style="color: gray; padding-left: 10px; padding-top: 10px; font-size: 18px;"> @Localizer["DirNoFIle"] </p>
+                                }
+                                else
+                                {
+                                    <!-- Вывод для выбора параметров из файла -->
+                                    @foreach (string dir in ViewBag.Dirs)
+                                    {
+                                        <div class="dropdown">
+                                            <a data-toggle="dropdown" aria-expanded="false">
+                                                <img src="~/images/folder_icon.png" style="width: 30px; height: 30px;"> @dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)
+                                            </a>
+                                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+                                                @foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<string>> t in ViewBag.Files)
+                                                {
+                                                    @foreach (string g in t.Value)
+                                                    {
+                                                        @if (t.Key.Equals(@dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)))
+                                                        {
+                                                            <a class="dropdown-item" name="@g"> <img src="~/images/file_icon.png" style="width: 25px; height: 25px;"> @g.Substring(g.LastIndexOf("\\") + 1).Replace("_" + User.Identity.Name, "") </a>
+                                                        }
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> @Localizer["Close"] </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- модальное окно выбора архива координат из списка -->
+    <div id="zipModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> @Localizer["Files"] </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container">
+                        <div class="d-flex align-items-center">
+                            <div id="coornav" style="position: relative; top: 10px; margin-bottom: 35px;">
+
+
+                                @if (ViewBag.Count <= 0)
+                                {
+                                    <p style="color: gray; padding-left: 10px; padding-top: 10px; font-size: 18px;">  @Localizer["DirNoFIle"] </p>
+                                }
+                                else
+                                {
+                                    <!-- Вывод для выбора параметров из файла -->
+                                    @foreach (string dir in ViewBag.Dirs)
+                                    {
+                                        <div class="dropdown">
+                                            <a data-toggle="dropdown" aria-expanded="false">
+                                                <img src="~/images/folder_icon.png" style="width: 30px; height: 30px;"> @dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)
+                                            </a>
+                                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+                                                @foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<string>> t in ViewBag.Files)
+                                                {
+                                                    @foreach (string g in t.Value)
+                                                    {
+                                                        @if (t.Key.Equals(@dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1)))
+                                                        {
+                                                            <a class="dropdown-item" name="@g"> <img src="~/images/file_icon.png" style="width: 25px; height: 25px;"> @g.Substring(g.LastIndexOf("\\") + 1).Replace("_" + User.Identity.Name, "") </a>
+                                                        }
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> @Localizer["Close"] </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+    // НЕ НУЖНО?
+    // если не при первичной загрузке страницы
+    if ('@ViewBag.Result' != "") {
+        Swal.fire("Успешно!", "Результаты получены: " + '@ViewBag.Result', "success");
+    }
+
+</script>
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $('.info').popover();
+
+
+        $(':not(#anything)').on('click', function (e) {
+            $('.info').each(function () {
+                //the 'is' for buttons that trigger popups
+                //the 'has' for icons and other elements within a button that triggers a popup
+                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                    $(this).popover('hide');
+                    return;
+                }
+            });
+        });
+
+        let array = new Array(); // для хранения путей выбранных файлов в методе Вороного
+        var graphPath;
+        var voronoyGraph;
+        var circPath;
+        var particleAmount; // количество распознанных частиц
+        var diameters; // диаметры распознанных частиц
+        var preloaderCheck = false; // чек для прелоадера
+        let newId = 0; // для хранения id нового параметра
+        var inData; // путь к картинке графика
+        var fullPath = '@ViewBag.FullPath'; // путь к папке со статической папкой
+        var MSDimage; // путь к картинке метода поиска MSD
+        var heatmapImage; // путь к графику heatmap (1004)
+        var leftBorder; // левая граница r метода S4
+        var rightBorder; // правая граница r метода S4
+        var webroot = location.href + "/";
+        var num_particles; // количество генерируемых частиц
+        var generatedFileName; // название сгенерированного файла
+        var generatedFolderName; // название папки где хранится выбранный файл
+        var autoBorderStatus; // автоматический рассчет границ для методов 9003 и 8003
+
+        // Динамическое удаление параметров из таблицы
+        function deleteParam(element, type) {
+
+            //element.closest("tr").remove(); так работает
+
+            switch (type) {
+                case "oneType":
+
+                    $.ajax({
+                        url: '/Method/DeleteOneType',
+                        type: 'POST',
+                        contentType: false,
+                        processData: false,
+                        data: JSON.stringify(element.getAttribute("item")), // сюда передаем id удаляемого параметра
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+
+                            // после того, как удалили параметр из БД, удаляем его и из динамической таблицы
+                            element.closest("tr").remove();
+
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: "error",
+                                title: "@Localizer["Wrong"]",
+                                text: "@Localizer["VerifyData"]"
+                            });
+                        }
+                    });
+                    break;
+                case "secondType":
+
+                    $.ajax({
+                        url: '/Method/DeleteSecondType',
+                        type: 'POST',
+                        contentType: false,
+                        processData: false,
+                        data: JSON.stringify(element.getAttribute("item")), // сюда передаем id удаляемого параметра
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+
+                            // после того, как удалили параметр из БД, удаляем его и из динамической таблицы
+                            element.closest("tr").remove();
+
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: "error",
+                                title: "@Localizer["Wrong"]",
+                                text: "@Localizer["VerifyData"]"
+                            });
+                        }
+                    });
+
+            }
+
+        }
+
+        // Открыть модальное окно
+        function ShowModal(elId) {
+            var modalAll = document.getElementById(elId);
+            modalAll.style.display = "flex";
+        }
+
+        // Закрыть модальное окно
+        function HideModal() {
+            if (event.target.classList.contains('modal-all')) {
+                event.currentTarget.style.display = "none";
+            }
+        }
+
+        // Функция для вставки выбранного метода в поле модального окна добавления параметра первой группы
+        function inputMethod_1() {
+            var selectlist = document.getElementById("selected");
+            var selectMethod = document.getElementById("dataselected");
+
+            var selectSelected = selectlist.options[selected.selectedIndex].value;
+
+            var testButton = document.getElementById("OTmethodId");
+
+            testButton.value = selectSelected;
+        }
+
+        // Функция для вставки выбранного метода в поле модального окна добавления параметра первой группы
+        function inputMethod_2() {
+
+            var selectlist = document.getElementById("selected");
+            var selectMethod = document.getElementById("dataselected");
+
+            var selectSelected = selectlist.options[selected.selectedIndex].value;
+
+            var testButton = document.getElementById("OSmethodId");
+
+            testButton.value = selectSelected;
+        }
+
+
+        // Открытие виджетов в зависимости от выбранных методов
+        function i() {
+
+            array = []; // для каждого отдельного метода свой массив в путями выбранных файлов
+
+            var selectlist = document.getElementById("selected");
+            var selectMethod = document.getElementById("dataselected");
+
+            var selectSelected = selectlist.options[selected.selectedIndex].value;
+
+            var isSelected = selectSelected != 1003; // если не выбрано первое значение
+            var BOPcheck = selectSelected == 1004; // исключение для параметра ориентационного порядка связи
+            var radialUniformityCheck = selectSelected == 2003; // исключение для оценки радиальной однородности
+            var lengthDeviation = selectSelected == 3003; // исключение для длины связи
+            var shapeFactorcheck = selectSelected == 4003; // исключение для коэффициента формы
+            var checkGraph = selectSelected == 5003; // исключение для графиков
+            var checkCirc = selectSelected == 6003; // исключение для распознавания
+            var checkMSD = selectSelected == 7003; // исключение для MSD
+            var checkS4 = selectSelected == 8003; // исключение для S4
+            var NOPcheck = selectSelected == 9003; // исключение для параметра нематического порядка
+
+            // отключаем выбор метода
+            selectMethod.style.display = (isSelected && !checkGraph && !checkCirc && !checkMSD && !checkS4 && !NOPcheck) ? 'inherit' : 'none';
+
+            // в случае с выбором метода "Параметр ориентационного порядка связи" или "Оценка радиальной однородности", отключаем возможность загрузки данных из БД
+            // а также ручной ввод переименовываем в "Сгенерировать" для генерации рандомных координат
+            if (BOPcheck || radialUniformityCheck || shapeFactorcheck || lengthDeviation) {
+                $('#dataselected option:contains("@Localizer["Source3"]")').attr("disabled", "disabled");
+                var t = $('#dataselected option:contains("@Localizer["Source1"]")').text("@Localizer["Generate"]");
+            }
+
+            // MSD
+            document.getElementById("alertMSD").style.display = checkMSD ? 'inherit' : 'none';
+
+            // S4
+            document.getElementById("alertS4").style.display = checkS4 ? 'inherit' : 'none';
+            document.getElementById("alertNOP").style.display = NOPcheck ? 'inherit' : 'none';
+
+            // проверяем выбранный способ
+            var dir = document.getElementById("dirselected");
+            var dirSelected = dir.options[dir.selectedIndex].value;
+
+            document.getElementById("chooseZIP").style.display = checkMSD || checkS4 || NOPcheck ? 'inherit' : 'none';
+
+            document.getElementById("autoBorders").style.display = checkS4 || NOPcheck ? 'inherit' : 'none';
+
+            document.getElementById("border").style.display = checkS4 || NOPcheck ? 'inherit' : 'none';
+            document.getElementById("otherMSDButton").style.display = checkMSD || checkS4 || NOPcheck ? 'inherit' : 'none';
+
+            document.getElementById("checkSEM").style.display = checkMSD || checkS4 || NOPcheck ? 'inherit' : 'none';
+
+            /*
+            document.getElementById("chooseZIP").style.display = checkMSD ? 'inherit' : 'none';
+            document.getElementById("alertMSD").style.display = checkMSD ? 'inherit' : 'none';
+            document.getElementById("otherMSDButton").style.display = checkMSD ? 'inherit' : 'none';
+            document.getElementById("checkSEM").style.display = checkMSD ? 'inherit' : 'none';
+            document.getElementById("checkGraphic").style.display = checkMSD ? 'inherit' : 'none';*/
+
+            // ДИАГРАММА ВОРОНОГО
+            document.getElementById("chooseCont1").style.display = checkGraph ? 'inherit' : 'none';
+            document.getElementById("chooseCont2").style.display = checkGraph ? 'inherit' : 'none';
+            document.getElementById('labelGraph').style.display = (checkGraph) ? 'inherit' : 'none';
+            document.getElementById("alertGraph").style.display = checkGraph ? 'inherit' : 'none';
+            document.getElementById("alertCirc").style.display = checkCirc ? 'inherit' : 'none';
+            document.getElementById("vorButton").style.display = checkGraph ? 'inherit' : 'none';
+
+            // РАСПОЗНАВАНИЕ ЧАСТИЦ
+            document.getElementById("chooseCirc").style.display = checkCirc ? 'inherit' : 'none';
+            document.getElementById("circButton").style.display = checkCirc ? 'inherit' : 'none';
+
+            // СКРЫТИЕ ЭЛЕМЕНТОВ_1 - методы 5003 и 6003
+            document.getElementById("labelGraph").style.display = 'none';
+            document.getElementById("wrapperTest").style.display = 'none';
+            document.getElementById("bordersResult").style.display = 'none';
+            document.getElementById("bordersDB").style.display = 'none';
+            document.getElementById("bordersInput").style.display = 'none';
+            document.getElementById("bordersFiles").style.display = 'none';
+
+            // СКРЫТИЕ ЭЛЕМЕНТОВ_2 - все остальные методы (1004, 1005, 2003, 3003, 4003)
+            document.getElementById("goIS").style.display = "none";
+            document.getElementById("imgHeatMap").style.display = "none";
+            document.getElementById("imgMSD").style.display = "none";
+            document.getElementById("SEMGraphic").style.display = "none";
+            document.getElementById("subarea").style.display = "none";
+            document.getElementById("particlesGenerate").style.display = "none";
+            document.getElementById("particlesNum").style.display = "none";
+            document.getElementById("partStatusNogen").style.display = "none";
+            document.getElementById("MSDtxt").style.display = "none";
+            document.getElementById("dropbtnMSD").style.display = "none";
+            document.getElementById("nav").style.display = "none";
+
+            // ВОЗВРАЩЕНИЕ К ДЕФОЛТНЫМ СОСТОЯНИЯМ КНОПОК ВЫБОРА ФАЙЛОВ
+
+            // $("#cfgLabel").text("Файлы не выбраны");
+            // document.getElementById("cfgChoose").disabled = false;
+
+            // СБРОС ВЫБРАННЫХ ФАЙЛОВ (и кнопок запуска методов)
+
+            document.getElementById("cfgChoose").disabled = false;
+            document.getElementById("coorChoose").disabled = false;
+            document.getElementById("circChoose").disabled = false;
+            document.getElementById("zipChoose").disabled = false;
+            document.getElementById("otherButton").disabled = true;
+            document.getElementById("otherMSDButton").disabled = true;
+            document.getElementById("otherCircButton").disabled = true;
+
+            document.getElementById("cfgLabel").innerHTML = "@Localizer["NoFileChosen"]";
+            document.getElementById("coorLabel").innerHTML = "@Localizer["NoFileChosen"]";
+            document.getElementById("circLabel").innerHTML = "@Localizer["NoFileChosen"]";
+            document.getElementById("zipLabel").innerHTML = "@Localizer["NoFileChosen"]";
+
+            // СКРЫТИЕ КНОПОК УДАЛЕНИЕ ВЫБРАННЫХ ФАЙЛОВ
+            document.getElementById("zipRemove").style.display = "none";
+            document.getElementById("cfgRemove").style.display = "none";
+            document.getElementById("coorRemove").style.display = "none";
+            document.getElementById("circRemove").style.display = "none";
+        }
+
+
+        // Открытие виджетов в зависимости от исчточника данных
+        function j() {
+
+            // проверяем метод
+            var selectMethod = document.getElementById("selected");
+            var selectedMethod = selectMethod.options[selectMethod.selectedIndex].value;
+
+            // проверяем выбранный способ
+            var selected = document.getElementById("dataselected");
+            var selectSelected = selected.options[selected.selectedIndex].value;
+            var isInputs = selectSelected == "inputs"; // если ручной ввод
+            var isFile = selectSelected == "file"; // если выборка данных из файла
+            var isDB = selectSelected == "database"; // если выборка данных из БД
+
+            // отслеживаем выбранный метод
+            var isBOP = selectedMethod == 1004; // если параметр ориентационного порядка связи
+            var isrUn = selectedMethod == 2003; // если оценка радиальной однородности
+            var isLD = selectedMethod == 3003; // если длина связи
+            var isSF = selectedMethod == 4003; // если коэффициент формы
+            var isNOP = selectedMethod == 9003; // если параметр нематического порядка
+
+            // 1004 2003 3003 4003
+            var genChaosButtons = document.getElementById("particlesGenerate");
+            var goISbtn = document.getElementById("goIS");
+            var subarea = document.getElementById("subarea");
+            document.getElementById("num_subarea").disabled = true;
+            var nums = document.getElementById("particlesNum");
+
+            // после отработки методов
+            var downloadButton = document.getElementById("MSDtxt");
+            var saveButton = document.getElementById("dropbtnMSD");
+            var labelGraph = document.getElementById("SEMGraphic");
+            var visualisation = document.getElementById("imgMSD");
+            document.getElementById("otherButton").style.display = "none";
+            var heatmap = document.getElementById("imgHeatMap");
+            var noGenStatus = document.getElementById("partStatusNogen");
+
+            // ОТОБРАЖЕНИЕ КОЛОНОК МЕТОДОВ
+            genChaosButtons.style.display = (isInputs && (isBOP || isNOP || isrUn || isSF || isLD)) ? 'inherit' : 'none';
+            genChaosButtons.disabled = true;
+
+            nums.style.display = (isInputs && (isBOP || isNOP || isrUn || isSF || isLD)) ? 'inherit' : 'none';
+
+            goISbtn.style.display = (isInputs || isFile && (isBOP || isNOP || isrUn || isSF || isLD)) ? 'inherit' : 'none';
+            goISbtn.disabled = true;
+
+            subarea.style.display = (isInputs || isFile && (isBOP || isNOP || isrUn || isSF || isLD)) ? 'inherit' : 'none';
+
+            downloadButton.style.display = "none";
+            saveButton.style.display = "none";
+            labelGraph.style.display = "none";
+            visualisation.style.display = "none";
+            heatmap.style.display = "none";
+            noGenStatus.style.display = "none";
+
+            // СКРЫТИЕ КНОПОК УДАЛЕНИЕ ВЫБРАННЫХ ФАЙЛОВ
+            document.getElementById("zipRemove").style.display = "none";
+            document.getElementById("cfgRemove").style.display = "none";
+            document.getElementById("coorRemove").style.display = "none";
+            document.getElementById("circRemove").style.display = "none";
+
+            document.getElementById("partStatus").style.display = (isLD || isrUn) ? "none" : "inline";
+
+            document.getElementById("methID").value = selectedMethod; // kak ydalit
+
+            // ВЫВОД ИЗ ФАЙЛА
+            var links = document.getElementById("nav");
+
+            links.style.display = isFile ? 'inherit' : 'none';
+
+            if (isFile && selectedMethod == "1004") {
+                Swal.fire({
+                    title: "@Localizer["CheckFile"]",
+                    text: "@Localizer["CheckFileAngle"]",
+                    icon: "warning",
+                    showCancelButton: false,
+                    confirmButtonText: "Ок",
+                    confirmButtonColor: "#1e90ff",
+                })
+            }
+            else if (isFile && (selectedMethod == "2003" || selectedMethod == "3003")) {
+                Swal.fire({
+                    title: "@Localizer["CheckFile"]",
+                    text: "@Localizer["CheckFileDist"]",
+                    icon: "warning",
+                    showCancelButton: false,
+                    confirmButtonText: "Ок",
+                    confirmButtonColor: "#1e90ff",
+                })
+            }
+
+            event.preventDefault();
+
+        }
+
+        $("#particleStatus").change(function () {
+            document.getElementById("num_subarea").disabled = false;
+            document.getElementById("goIS").disabled = false;
+        });
+
+        $("#clear").click(function (e) {
+
+            // проверяем выбранный метод
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+
+            if (methodSelected == "1004" || methodSelected == "1005") {
+                document.getElementById("show").value = "";
+                document.getElementById("show1").value = "";
+            }
+            else if (methodSelected == "2003" || methodSelected == "3003") {
+                document.getElementById("show").value = "";
+                document.getElementById("TwoSj").value = "";
+            }
+            else if (methodSelected == "4003") {
+                document.getElementById("p").value = "";
+                document.getElementById("A").value = "";
+            }
+        });
+
+        // при нажатии на кнопку генерации неупорядоченных частиц
+        $("#chaos").click(function (e) {
+            document.getElementById("orderGenerate").disabled = true; // выбрать файл больше нельзя
+
+            document.getElementById("preloader").style.display = 'inherit';
+
+            // вызывается python скрипт генерации неупорядоченных частиц
+            $.ajax({
+                url: '/Method/MethodsScript',
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                data: JSON.stringify("chaos" + "-" + window.location.href), // method id + user id + N + SjJSON.stringify(methodSelected + "-" + $("#NDB").val() + "-" + $("#OneSjDB").val()),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    var chaosLabel = document.getElementById('chaosLabel');
+                    chaosLabel.style.color = "green";
+                    document.getElementById("preloader").style.display = 'none';
+                    chaosLabel.innerText = 'Частицы сгенерированы!';
+
+                    document.getElementById("otherMSDButton").disabled = false;
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        });
+
+        $("#clear2").click(function (e) {
+
+            // проверяем выбранный метод
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+
+            if (methodSelected == "1004" || methodSelected == "1005") {
+                document.getElementById("N").value = "";
+                document.getElementById("edges").value = "";
+            }
+            else if (methodSelected == "2003" || methodSelected == "3003") {
+                document.getElementById("N").value = "";
+                document.getElementById("OneSj").value = "";
+            }
+            else if (methodSelected == "4003") {
+                document.getElementById("p").value = "";
+                document.getElementById("A").value = "";
+            }
+
+        });
+
+        $("#buttonDB").click(function (e) {
+            // проверяем выбранный метод
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+
+            if (methodSelected == "1004" || methodSelected == "1005") {
+
+                alert('check here');
+
+            } else if (methodSelected == "2003" || methodSelected == "3003") {
+
+                if (($("#NDB").val() == "" || $("#OneSjDB").val() == "")) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["InputValue"]"
+                    });
+                }
+                else {
+
+                    Swal.fire({
+                        title: "@Localizer["Sure"]",
+                        text: "@Localizer["VerifyData2"]",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "@Localizer["Yes"]",
+                        confirmButtonColor: "#1e90ff",
+                        cancelButtonText: "@Localizer["Cancel"]",
+                    }).then(function (result) {
+
+                        if (isNaN($("#NDB").val()) || isNaN($("#OneSjDB").val().replace(/[,]/g, ''))) {
+
+                            Swal.fire({
+                                icon: "error",
+                                title: "@Localizer["Wrong"]",
+                                text: "@Localizer["VerifyData"]"
+                            });
+
+                        } else {
+                            if (result.value) {
+
+                                $.ajax({
+                                    url: '/Method/MethodsScript',
+                                    type: 'POST',
+                                    contentType: false,
+                                    processData: false,
+                                    data: JSON.stringify(methodSelected + "-" + $("#NDB").val() + "-" + $("#OneSjDB").val()),
+                                    contentType: 'application/json; charset=utf-8',
+                                    success: function (data) {
+
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "@Localizer["GetResult"]",
+                                            text: "@Localizer["Result"]" + Number(JSON.stringify(data).substring(JSON.stringify(data).lastIndexOf(":") + 1).replace("}", "")).toFixed(2)
+                                        });
+
+
+                                    },
+                                    error: function () {
+                                        Swal.fire({
+                                            icon: "error",
+                                            title: "@Localizer["Wrong"]",
+                                            text: "@Localizer["VerifyData"]"
+                                        });
+                                    }
+                                });
+
+                                //alert(e.target.getAttribute('name'));
+                            }
+                        }
+                    });
+                }
+            } else if (methodSelected == "4003") {
+                if ($("#pDB").val() == "" || $("#ADB").val() == "") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["VerifyData"]"
+                    });
+                } else {
+                    Swal.fire({
+                        title: "@Localizer["Sure"]",
+                        text: "@Localizer["VerifyData2"]",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "@Localizer["Yes"]",
+                        confirmButtonColor: "#1e90ff",
+                        cancelButtonText: "@Localizer["Cancel"]",
+                    }).then(function (result) {
+
+                        if (isNaN($("#pDB").val()) || isNaN($("#ADB").val())) {
+
+                            Swal.fire({
+                                icon: "error",
+                                title: "@Localizer["Wrong"]",
+                                text: "@Localizer["VerifyData"]"
+                            });
+
+                        } else {
+                            if (result.value) {
+
+                                $.ajax({
+                                    url: '/Method/MethodsScript',
+                                    type: 'POST',
+                                    contentType: false,
+                                    processData: false,
+                                    data: JSON.stringify(methodSelected + "-" + $("#pDB").val() + "-" + $("#ADB").val()),
+                                    contentType: 'application/json; charset=utf-8',
+                                    success: function (data) {
+
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "@Localizer["GetResult"]",
+                                            text: "@Localizer["Result"]" + Number(JSON.stringify(data).substring(JSON.stringify(data).lastIndexOf(":") + 1).replace("}", "")).toFixed(2)
+                                        });
+
+
+                                    },
+                                    error: function () {
+                                        Swal.fire({
+                                            icon: "error",
+                                            title: "@Localizer["Wrong"]",
+                                            text: "@Localizer["VerifyData"]"
+                                        });
+                                    }
+                                });
+
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        $("#button").click(function (e) {
+
+            // проверяем выбранный метод
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+
+            if (methodSelected == "1004" || methodSelected == "1005") {
+                if (($("#N").val() == "" || $("#edges").val() == "")) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["EnterWarn"]"
+                    });
+                }
+                else {
+
+                    Swal.fire({
+                        title: "@Localizer["Sure"]",
+                        text: "@Localizer["VerifyData2"]",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "@Localizer["Yes"]",
+                        confirmButtonColor: "#1e90ff",
+                        cancelButtonText: "@Localizer["Cancel"]",
+                    }).then(function (result) {
+
+                        if (isNaN($("#N").val()) || isNaN($("#edges").val().replace(/[,]/g, ''))) {
+
+                            Swal.fire({
+                                icon: "error",
+                                title: "@Localizer["Wrong"]",
+                                text: "@Localizer["VerifyData"]"
+                            });
+
+                        } else {
+                            if (result.value) {
+
+                                $.ajax({
+                                    url: '/Method/MethodsScript',
+                                    type: 'POST',
+                                    contentType: false,
+                                    processData: false,
+                                    data: JSON.stringify(methodSelected + "-" + $("#N").val() + "-" + $("#edges").val()),
+                                    contentType: 'application/json; charset=utf-8',
+                                    success: function (data) {
+
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "@Localizer["GetResult"]",
+                                            text: "@Localizer["Result"]" + Number(JSON.stringify(data)).toFixed(2)//Math.round(Number(JSON.stringify(data)), 2)
+                                        });
+
+
+                                    },
+                                    error: function () {
+                                        Swal.fire({
+                                            icon: "error",
+                                            title: "@Localizer["Wrong"]",
+                                            text: "@Localizer["VerifyData"]"
+                                        });
+                                    }
+                                });
+
+                                //alert(e.target.getAttribute('name'));
+                            }
+                        }
+                    });
+                }
+            } else if (methodSelected == "2003" || methodSelected == "3003") {
+
+                if (($("#N").val() == "" || $("#OneSj").val() == "")) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["EnterWarn"]"
+                    });
+                }
+                else {
+
+                    Swal.fire({
+                        title: "@Localizer["Sure"]",
+                        text: "@Localizer["VerifyData2"]",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "@Localizer["Yes"]",
+                        confirmButtonColor: "#1e90ff",
+                        cancelButtonText: "@Localizer["Cancel"]",
+                    }).then(function (result) {
+
+                        if (isNaN($("#N").val()) || isNaN($("#OneSj").val().replace(/[,]/g, ''))) {
+
+                            Swal.fire({
+                                icon: "error",
+                                title: "@Localizer["Wrong"]",
+                                text: "@Localizer["VerifyData"]"
+                            });
+
+                        } else {
+                            if (result.value) {
+
+                                $.ajax({
+                                    url: '/Method/MethodsScript',
+                                    type: 'POST',
+                                    contentType: false,
+                                    processData: false,
+                                    data: JSON.stringify(methodSelected + "-" + $("#N").val() + "-" + $("#OneSj").val()),
+                                    contentType: 'application/json; charset=utf-8',
+                                    success: function (data) {
+
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "@Localizer["GetResult"]",
+                                            text: "@Localizer["Result"]" + Number(JSON.stringify(data).substring(JSON.stringify(data).lastIndexOf(":") + 1).replace("}", "")).toFixed(2)
+                                        });
+
+
+                                    },
+                                    error: function () {
+                                        Swal.fire({
+                                            icon: "error",
+                                            title: "@Localizer["Wrong"]",
+                                            text: "@Localizer["VerifyData"]"
+                                        });
+                                    }
+                                });
+
+                                //alert(e.target.getAttribute('name'));
+                            }
+                        }
+                    });
+                }
+            } else if (methodSelected == "4003") {
+                if ($("#p").val() == "" || $("#A").val() == "") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["VerifyData"]"
+                    });
+                } else {
+                    Swal.fire({
+                        title: "@Localizer["Sure"]",
+                        text: "@Localizer["VerifyData2"]",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "@Localizer["Yes"]",
+                        confirmButtonColor: "#1e90ff",
+                        cancelButtonText: "@Localizer["Cancel"]",
+                    }).then(function (result) {
+
+                        if (isNaN($("#p").val()) || isNaN($("#A").val())) {
+
+                            Swal.fire({
+                                icon: "error",
+                                title: "@Localizer["Wrong"]",
+                                text: "@Localizer["VerifyData"]"
+                            });
+
+                        } else {
+                            if (result.value) {
+
+                                $.ajax({
+                                    url: '/Method/MethodsScript',
+                                    type: 'POST',
+                                    contentType: false,
+                                    processData: false,
+                                    data: JSON.stringify(methodSelected + "-" + $("#p").val() + "-" + $("#A").val()),
+                                    contentType: 'application/json; charset=utf-8',
+                                    success: function (data) {
+
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "@Localizer["GetResult"]",
+                                            text: "@Localizer["Result"]" + Number(JSON.stringify(data).substring(JSON.stringify(data).lastIndexOf(":") + 1).replace("}", "")).toFixed(2)
+                                        });
+
+
+                                    },
+                                    error: function () {
+                                        Swal.fire({
+                                            icon: "error",
+                                            title: "@Localizer["Wrong"]",
+                                            text: "@Localizer["VerifyData"]"
+                                        });
+                                    }
+                                });
+
+                            }
+                        }
+                    });
+                }
+            }
+
+        });
+
+        $("#but").click(function (e) {
+
+            // проверяем выбранный метод
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+
+            if (methodSelected == "1004" || methodSelected == "1005") {
+                if ($("#show").val() == "" || $("#show1").val() == "") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["InputValue"]"
+                    });
+                } else {
+
+
+                    Swal.fire({
+                        title: "@Localizer["Sure"]",
+                        text: "@Localizer["VerifyData2"]",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "@Localizer["Yes"]",
+                        confirmButtonColor: "#1e90ff",
+                        cancelButtonText: "@Localizer["Cancel"]",
+                    }).then(function (result) {
+                        if (result.value) {
+
+                            // проверка на правильный ввод (N is integer, edges is string, but contains only ints)
+                            if (isNaN($("#show").val()) || isNaN($("#show1").val().replace(/[,]/g, ''))) {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "@Localizer["Wrong"]",
+                                    text: "@Localizer["VerifyData"]"
+                                });
+                            }
+                            else {
+                                $.ajax({
+                                    url: '/Method/MethodsScript',
+                                    type: 'POST',
+                                    contentType: false,
+                                    processData: false,
+                                    data: JSON.stringify(methodSelected + "-" + $("#show").val() + "-" + $("#show1").val()),
+                                    contentType: 'application/json; charset=utf-8',
+                                    success: function (data) {
+
+                                        //Swal.fire({
+                                        //    icon: "success",
+                                        //    title: "Результаты получены!",
+                                        //    text: "Результат: " + Number(JSON.stringify(data).substring(JSON.stringify(data).lastIndexOf(":") + 1).replace("}", "")).toFixed(2)
+                                        //});
+
+                                        var resultInput = document.getElementById("resultInput");
+
+                                        var result = document.getElementById("bordersResult");
+
+                                        result.style.display = 'inherit';
+
+                                        resultInput.innerHTML = "@Localizer["Result"]" + data;
+
+
+                                    },
+                                    error: function () {
+                                        Swal.fire({
+                                            icon: "error",
+                                            title: "@Localizer["Wrong"]",
+                                            text: "@Localizer["VerifyData"]"
+                                        });
+                                    }
+                                });
+                            }
+                            //alert(e.target.getAttribute('name'));
+                        }
+                    });
+                };
+            }
+
+            else if (methodSelected == "2003" || methodSelected == "3003") {
+                if ($("#show").val() == "" || $("#TwoSj").val() == "") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["InputValue"]"
+                    });
+                } else {
+                    Swal.fire({
+                        title: "@Localizer["Sure"]",
+                        text: "@Localizer["VerifyData2"]",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "@Localizer["Yes"]",
+                        confirmButtonColor: "#1e90ff",
+                        cancelButtonText: "@Localizer["Cancel"]",
+                    }).then(function (result) {
+                        if (result.value) {
+
+                            // проверка на правильный ввод (N is integer, edges is string, but contains only ints)
+                            if (isNaN($("#show").val()) || isNaN($("#TwoSj").val().replace(/[,]/g, ''))) {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "@Localizer["Wrong"]",
+                                    text: "@Localizer["VerifyData"]"
+                                });
+                            }
+                            else {
+                                $.ajax({
+                                    url: '/Method/MethodsScript',
+                                    type: 'POST',
+                                    contentType: false,
+                                    processData: false,
+                                    data: JSON.stringify(methodSelected + "-" + $("#show").val() + "-" + $("#TwoSj").val()),
+                                    contentType: 'application/json; charset=utf-8',
+                                    success: function (data) {
+                                        //Swal.fire({
+                                        //    icon: "success",
+                                        //    title: "Результаты получены!",
+                                        //    text: "Результат: " + Number(JSON.stringify(data).substring(JSON.stringify(data).lastIndexOf(":") + 1).replace("}", "")).toFixed(2)
+                                        //});
+
+                                        var resultInput = document.getElementById("resultInput");
+
+                                        var result = document.getElementById("bordersResult");
+
+                                        result.style.display = 'inherit';
+
+                                        resultInput.innerHTML = "@Localizer["Result"]" + data;
+
+                                    },
+                                    error: function () {
+                                        Swal.fire({
+                                            icon: "error",
+                                            title: "@Localizer["Wrong"]",
+                                            text: "@Localizer["VerifyData"]"
+                                        });
+                                    }
+                                });
+                            }
+                            //alert(e.target.getAttribute('name'));
+                        }
+                    });
+                }
+            }
+            else if (methodSelected == "4003") {
+
+                const isNumeric = n => !!Number(n);
+
+                if ($("#handP").val() == "" || $("#handA").val() == "" || !isNumeric($("#handP").val())
+                    || !isNumeric($("#handA").val()) || Number($("#handP").val()) < 0 || Number($("#handA").val()) < 0
+                    || Number($("#handP").val()) == 0 || Number($("#handP").val()) == 0) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["WrongParameters"]"
+                    });
+                }
+                else {
+
+                    Swal.fire({
+                       title: "@Localizer["Sure"]",
+                        text: "@Localizer["VerifyData2"]",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "@Localizer["Yes"]",
+                        confirmButtonColor: "#1e90ff",
+                        cancelButtonText: "@Localizer["Cancel"]",
+                    }).then(function (result) {
+                        if (result.value) {
+
+                            // проверка на правильный ввод (N is integer, edges is string, but contains only ints)
+                            if (isNaN($("#show").val()) || isNaN($("#show1").val().replace(/[,]/g, ''))) {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "@Localizer["Wrong"]",
+                                    text: "@Localizer["VerifyData"]"
+                                });
+                            }
+                            else {
+                                $.ajax({
+                                    url: '/Method/MethodsScript',
+                                    type: 'POST',
+                                    contentType: false,
+                                    processData: false,
+                                    data: JSON.stringify(methodSelected + "-" + $("#handP").val() + "-" + $("#handA").val()),
+                                    contentType: 'application/json; charset=utf-8',
+                                    success: function (data) {
+                                        //Swal.fire({
+                                        //    icon: "success",
+                                        //    title: "Результаты получены!",
+                                        //    text: "Результат: " + Number(JSON.stringify(data).substring(JSON.stringify(data).lastIndexOf(":") + 1).replace("}", "")).toFixed(2)
+                                        //});
+
+                                        var resultInput = document.getElementById("resultInput");
+
+                                        var result = document.getElementById("bordersResult");
+
+                                        result.style.display = 'inherit';
+
+                                        resultInput.innerHTML = "@Localizer["Result"]" + data;
+
+                                    },
+                                    error: function () {
+                                        Swal.fire({
+
+                                            icon: "error",
+                                            title: "@Localizer["Wrong"]",
+                                            text: "@Localizer["VerifyData"]"
+                                        });
+                                    }
+                                });
+                            }
+                            //alert(e.target.getAttribute('name'));
+                        }
+                    });
+                }
+
+            }
+
+            else if (methodSelected == "5003") {
+
+                $.ajax({
+                    url: '/Method/MethodsScript',
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    data: JSON.stringify(methodSelected + "-" + $("#show").val() + "-" + $("#TwoSj").val()),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "@Localizer["GetResult"]",
+                            text: "@Localizer["Result"]" + "test"
+                        });
+
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: "error",
+                            title: "@Localizer["Wrong"]",
+                            text: "@Localizer["VerifyData"]"
+                        });
+                    }
+                });
+
+            }
+
+        });
+
+
+        $(".filedown-item").click(function (e) {
+
+            // проверяем выбранный метод
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+            let selectedImage; // переменная для хранения сохраняемого изображения (метод 1004)
+
+            var dirName = e.target.getAttribute('name');
+
+            // dir.Substring(dir.LastIndexOf("\\") + 1, (dir.LastIndexOf("_") - dir.LastIndexOf("\\")) - 1) ВЫТАСКИВАЕМ ПРОСТО НАЗВАНИЕ ПАПКИ
+
+            Swal.fire({
+                title: 'Выберите расширение картинки',
+                input: 'select',
+                inputOptions: {
+                    '.jpeg': '.jpeg',
+                    '.png': '.png',
+                    '.svg': '.svg',
+                    '.eps': '.eps',
+                    '.pdf': '.pdf'
+                },
+                confirmButtonColor: '#8CD4F5',
+                // inputPlaceholder: 'required',
+                showCancelButton: true,
+                inputValidator: function (value) {
+                    return new Promise(function (resolve, reject) {
+                        if (value !== '') {
+                            resolve();
+                        } else {
+                            resolve('Необходимо выбрать расширение!');
+                        }
+                    });
+                }
+            }).then(function (result) {
+
+                if (result.isConfirmed) {
+                    // меняем название файла в зависимости от выбранного расширения
+
+                    switch (methodSelected) {
+
+                        case "5003":
+                        case "7003":
+                        case "8003":
+                        case "9003":
+
+                            var extIndex = MSDimage.indexOf(".svg"); // индекс начала расширения, которое мы будем менять
+
+                            NewMSDimage = MSDimage.substring(0, extIndex) + result.value; // новый путь к картинке с выбранным расширением
+
+                            break;
+
+                        case "1004":
+                        case "2003":
+                        case "3003":
+                        case "4003":
+
+                            // ГРАФИК heatmap
+                            var extHMIndex = heatmapImage.indexOf(".svg"); // индекс начала расширения, которое мы будем менять
+
+                            NewHMimage = heatmapImage.substring(0, extHMIndex) + result.value;
+
+                            // ГРАФИК РАСПОЛОЖЕНИЯ ЧАСТИЦ
+                            var extVISIndex = MSDimage.indexOf(".svg"); // индекс начала расширения, которое мы будем менять
+
+                            NewVSimage = MSDimage.substring(0, extVISIndex) + result.value;
+
+                            break;
+                    }
+
+                    // после меняем входной параметр после всех модификаций
+                    // if (methodSelected == 5003) { inData = JSON.stringify(dirName + "+" + voronoyGraph); }
+                    if (methodSelected == 5003 || methodSelected == 7003 || methodSelected == 8003 || methodSelected == 9003) { inData = JSON.stringify(dirName + "+" + NewMSDimage); alert(dirName); }
+                    else if (methodSelected == 1004 || methodSelected == 2003 || methodSelected == 3003 || methodSelected == 4003) { inData = JSON.stringify(dirName + "+" + NewHMimage + "+" + NewVSimage); }
+
+                    $.ajax({
+                        url: '/File/Move',
+                        type: 'POST',
+                        contentType: false,
+                        processData: false,
+                        data: inData,
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+
+                            if (data == "error") {
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "@Localizer["Wrong"]",
+                                    text: "@Localizer["AlreadyMoved"]" // декодируем результат
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "@Localizer["Success"]",
+                                    text: "@Localizer["FileSuccessMoved"]" // декодируем результат
+                                });
+                            }
+
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: "error",
+                                title: "@Localizer["Wrong"]",
+                                text: "@Localizer["ErrorFileMove"]" // декодируем результат
+                            });
+                        }
+
+                    });
+                }
+            });
+        })
+
+
+        $(".dropdown-item").click(function (e) {
+
+
+            // проверяем выбранный метод
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+
+            var fileName = this.name; // название выбранного файла
+
+            Swal.fire({
+                title: "@Localizer["Sure"]",
+                text: "@Localizer["VerifyData2"]",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "@Localizer["Yes"]",
+                confirmButtonColor: "#1e90ff",
+                cancelButtonText: "@Localizer["Cancel"]",
+            }).then(function (result) {
+                if (result.value) {
+
+                    if (isNaN($("#N").val()) || isNaN($("#edges").val().replace(/[,]/g, ''))) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "@Localizer["Wrong"]",
+                            text: "@Localizer["VerifyData"]"
+                        });
+                    } else {
+                        $.ajax({
+                            url: '/Method/Test',
+                            type: 'POST',
+                            contentType: false,
+                            processData: false,
+                            data: JSON.stringify(e.target.getAttribute('name')),
+                            contentType: 'application/json; charset=utf-8',
+                            success: function (data) {
+
+                                // проверяем на метод
+                                var isIS = methodSelected == 1004;
+                                var isRad = methodSelected == 2003;
+                                var isLen = methodSelected == 3003;
+                                var isSF = methodSelected == 4003;
+                                var isGraph = methodSelected == 5003;
+                                var isCirc = methodSelected == 6003;
+                                var isMSD = methodSelected == 7003;
+                                var isS4 = methodSelected == 8003;
+                                var isNOP = methodSelected == 9003;
+
+                                // 1004 метод
+                                if (isIS || isRad || isSF || isLen) {
+
+                                    console.log("here");
+
+                                    var label = document.getElementById("partStatusNogen");
+                                    var pathnames = e.target.getAttribute('name').split("\\");
+
+                                    // исключение для метода оценки радиальной однородности
+                                    label.style.display = (isSF || isIS) ? 'inherit' : 'none';
+
+                                    generatedFileName = pathnames[pathnames.length - 1]; // folder + filename
+                                    generatedFolderName = pathnames[pathnames.length - 2];
+
+                                    // for radial unformity method
+
+                                    if (isRad) {
+                                        Swal.fire({
+                                            icon: "info",
+                                            title: "@Localizer["Attention"]",
+                                            text: "@Localizer["Warning1004"]"
+                                        });
+                                    }
+
+                                    document.getElementById("labelWithoutStatus").style.display = (isRad || isLen) ? "inherit" : "none";
+                                    $("#labelWithoutStatus").text(generatedFileName);
+                                    document.getElementById("num_subarea").disabled = (document.getElementById("labelWithoutStatus").innerHTML.trim() != '' && (isRad || isLen)) ? false : true;
+                                    document.getElementById("goIS").disabled = (isRad || isLen) ? false : true;
+
+                                }
+                                else if (isGraph) {
+                                    // если выбран метод диаграммы Вороного
+                                    // нужно выбрать 2 файла с конфигурационными параметрами
+                                    // и файл с координатами частиц
+
+                                    var cfgPath = e.target.getAttribute('name');
+
+                                    let fileName = cfgPath.substring(cfgPath.lastIndexOf("\\") + 1);
+
+                                    if (document.getElementById("cfgLabel").textContent == " Файлы не выбраны ") {
+                                        $("#cfgLabel").text(fileName);
+
+                                        document.getElementById("cfgRemove").style.display = "inherit"; // кнопка для перевыбора файла
+
+                                        array.unshift(encodeURIComponent(cfgPath)); // храним пути выбранных файлов
+                                        document.getElementById("cfgChoose").disabled = true; // выбрать файл больше нельзя
+                                        setTimeout(closeModal('#cfgModal'), 500); // закрываем модальное окно
+
+
+                                    } else if (document.getElementById("coorLabel").textContent == " Файлы не выбраны ") {
+                                        $("#coorLabel").text(fileName);
+
+                                        document.getElementById("coorRemove").style.display = "inherit"; // кнопка для перевыбора файла
+
+                                        array.unshift(encodeURIComponent(cfgPath)); // храним пути выбранных файлов
+                                        document.getElementById("coorChoose").disabled = true; // выбрать файл больше нельзя
+                                        setTimeout(closeModal('#coorModal'), 500);
+
+                                        document.getElementById("otherButton").disabled = false;
+
+                                    } else { }
+
+
+
+                                }
+                                else if (isCirc) {
+
+                                    circPath = e.target.getAttribute('name');
+
+                                    // alert(circPath);
+
+                                    let fileName = circPath.substring(circPath.lastIndexOf("\\") + 1);
+
+                                    document.getElementById("circRemove").style.display = "inherit"; // кнопка для перевыбора файла
+
+                                    document.getElementById('otherCircButton').disabled = false;
+
+                                    $("#circLabel").text(fileName);
+                                    array.unshift(circPath); // храним пути выбранных файлов
+                                    document.getElementById("circChoose").disabled = true; // выбрать файл больше нельзя
+
+                                    setTimeout(closeModal('#circModal'), 500);
+
+                                }
+
+                                // ЕСЛИ ВЫБРАН МЕТОД РАСЧЕТА MSD
+                                else if (isMSD || isS4 || isNOP) {
+
+                                    // если выбран метод MSD
+                                    // нужно выбрать архив с координатами
+
+                                    var cfgPath = e.target.getAttribute('name');
+                                    let fileName = cfgPath.substring(cfgPath.lastIndexOf("\\") + 1);
+
+                                    document.getElementById("zipRemove").style.display = "inherit"; // кнопка для перевыбора файла
+
+                                    $("#zipLabel").text(fileName); // выводим название файла
+
+                                    array.unshift(encodeURIComponent(cfgPath)); // храним пути выбранных файлов
+                                    document.getElementById("zipChoose").disabled = true; // выбрать файл больше нельзя
+                                    setTimeout(closeModal('#zipModal'), 500);
+
+                                    document.getElementById("otherMSDButton").disabled = false;
+                                }
+
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                    //alert(e.target.getAttribute('name'));
+                }
+            });
+        });
+
+        function closeModal(name) {
+
+            $(name).modal('hide');
+            $(name).hide();
+            $('.modal-backdrop').hide();
+            $("body").removeClass("modal-open");
+
+
+        }
+
+        $('.block__title').click(function () {
+            $(this).toggleClass('active').next().slideToggle(300);
+        });
+
+        $("#otherCircButton").click(function (e) {
+
+            preloaderCheck = true;
+            document.getElementById("preloader").style.display = preloaderCheck ? 'inherit' : 'none';
+
+            /*
+            Swal.fire({
+                icon: "info",
+                title: "Ожидайте",
+                text: "В зависимости от изображения его анализ может занять до нескольких минут."
+            });*/
+
+            // проверяем выбранный метод
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+
+            if (document.getElementById("circLabel").textContent == "@Localizer["NoFileChosen"]") {
+                Swal.fire({
+                    icon: "error",
+                    title: "@Localizer["Wrong"]",
+                    text: "@Localizer["AttnSelectFile"]"
+                });
+            } else {
+
+                $.ajax({
+                    url: '/Method/MethodsScript',
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    // кодируем строки
+                    data: JSON.stringify(encodeURIComponent(methodSelected) + "-" + circPath),  // id метода и путь к сурсу
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        let arr = data.split('\n');
+
+                        //alert(decodeURIComponent(data)); // магия какая-то
+                        //alert(data); // магия какая-то
+                        one = arr[0].replace(/\s{2,}/g, ' ');
+                        two = arr[1].replace(/\s{2,}/g, ' ');
+
+                        var link = "window.location.href = '" + one.replace(" ", "").replaceAll('\\', '\\\\') + "';";
+                        var testLink = "window.open('" + one.replace(" ", "").replaceAll('\\', '\\\\') + "')";
+
+                        $('#img_2').attr('onclick', testLink);
+                        document.getElementById("img_3").src = two;
+
+                        preloaderCheck = false;
+
+                        document.getElementById("preloader").style.display = "none";
+
+                        document.getElementById('wrapperTest').style.display = (methodSelected == "6003") ? 'inherit' : 'none';
+
+                        /*
+                        Swal.fire({
+                            title: "",
+                            text: "Загрузка...",
+                            iconHtml: '<img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/04de2e31234507.564a1d23645bf.gif" style="width:150px; height:150px;">',
+                            showConfirmButton: false,
+                            closeOnClickOutside: false,
+                            customClass: 'swal-size-sm',
+                            //customClass: {
+                            //    icon: 'no-border'
+                            //}
+                        });*/
+
+
+                        //let arr = data.split('\n');
+
+
+                        ////alert(decodeURIComponent(data)); // магия какая-то
+                        ////alert(data); // магия какая-то
+
+                        //// отображение первого графика
+                        //document.getElementById('img_2').style.display = (methodSelected == "6003") ? 'inherit' : 'none';
+                        //document.getElementById('img_4').style.display = (methodSelected == "6003") ? 'inherit' : 'none';
+                        //document.getElementById('img_5').style.display = (methodSelected == "6003") ? 'flex' : 'none';
+                        //one = arr[0].replace(/\s{2,}/g, ' ');
+
+                        //var link = "window.location.href = '" + one.replace(" ", "").replaceAll('\\', '\\\\') + "';";
+                        //var testLink = "window.open('" + one.replace(" ", "").replaceAll('\\', '\\\\') + "')";
+
+                        //$('#img_2').attr('onclick', testLink);
+
+                        //document.getElementById('circTextLabel').style.display = (methodSelected == "6003") ? 'inherit' : 'none';
+                        //document.getElementById('circTextLabel2').style.display = (methodSelected == "6003") ? 'inherit' : 'none';
+
+                        //// отображение второго графика
+                        //document.getElementById('img_3').style.display = (methodSelected == "6003") ? 'inherit' : 'none';
+                        //two = arr[1].replace(/\s{2,}/g, ' ');
+
+                        //document.getElementById("img_3").src = two;
+
+                        //document.getElementById("circChoose").disabled = false;
+
+                        //particleAmount = arr[2].replace(/\s{2,}/g, ' ');; // присваиваем количество распознанных частиц
+                        //diameters = arr[3].replace(/\s{2,}/g, ' ');; // присваиваем их диаметры
+
+                    },
+                    error: function () {
+                        Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["VerifyData"]"
+                    });
+
+                    }
+                });
+
+            }
+        })
+
+        // Проверка на тип данных float
+        function isFloat(n) {
+            return Number(n) === n && n % 1 !== 0;
+        }
+        // Проверка на тип данных int
+        function isInt(n) {
+            return n % 1 === 0;
+        }
+
+        $("#otherMSDButton").click(function (e) {
+
+            var dataMethod; // переменная для хранения входных данных
+            document.getElementById("preloader").style.display = 'inherit';
+
+            // проверяем выбранный метод
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+
+            var leftBorder = (autoBorderStatus) ? null : $("#borderLeft").val().trim(); // извлекаем и присваиваем значения левой границы
+            var rightBorder = (autoBorderStatus) ? null : $("#borderRight").val().trim(); // извлекаем и присваиваем значения правой границы
+
+
+            // проверяем выбранный метод (в зависимости от этого формируем входные файлы)
+            if (methodSelected == 7003) { var dataMethod = JSON.stringify(encodeURIComponent(methodSelected) + "-" + decodeURIComponent(array[0]) + "-" + switchStatusSEM); }
+            else if (methodSelected == 8003 || methodSelected == 9003) {
+
+                var dataMethod = JSON.stringify(encodeURIComponent(methodSelected) + "-" + decodeURIComponent(array[0]) + "-" + switchStatusSEM + "-"
+                    + leftBorder + "-" + rightBorder + "-" + Nring.value + "-" + autoBorderStatus);
+
+            }
+            else if (methodSelected == 1004) {
+                var dataMethod = JSON.stringify(encodeURIComponent(methodSelected) + "-" + decodeURIComponent(array[0]) + "-" + switchStatusSEM + "-"
+                    + leftBorder + "-" + rightBorder + "-" + Nring.value);
+            }
+
+            // проверка, если левая граница больше правой (правая меньше левой)
+            if ((parseFloat(leftBorder) > parseFloat(rightBorder)) && methodSelected != 7003 && !autoBorderStatus) {
+
+                Swal.fire({
+                    icon: "error",
+                    title: "@Localizer["borderWarning"]",
+                    text: "@Localizer["leftBigger"]"
+                });
+
+                document.getElementById("preloader").style.display = 'none';
+
+            }
+            // проверка, если ввод неправильных символов
+            else if ((isNaN(parseFloat(leftBorder)) || isNaN(parseFloat(rightBorder))) && methodSelected != 7003 && !autoBorderStatus) {
+                Swal.fire({
+                    icon: "error",
+                    title: "@Localizer["borderWarning"]",
+                    text: "@Localizer["WrongBorder"]"
+                });
+
+                document.getElementById("preloader").style.display = 'none';
+            }
+            // проверка, если границы выходят из диапазона [0, 1]
+            else if ((parseFloat(leftBorder) < 0 || parseFloat(leftBorder) > 1 || parseFloat(rightBorder) < 0 || parseFloat(rightBorder) > 1) && methodSelected != 7003 && !autoBorderStatus) {
+                Swal.fire({
+                    icon: "error",
+                    title: "@Localizer["Wrong"]",
+                    text: "@Localizer["IntervalBorder"]"
+                });
+
+                document.getElementById("preloader").style.display = 'none';
+            }
+            // проверка на целочисленность количества колец
+            else if ((!isInt(parseInt(Nring.value)) || isNaN(parseInt(Nring.value)) || isFloat(Number(Nring.value))) && methodSelected != 7003) {
+                Swal.fire({
+                    icon: "error",
+                    title: "@Localizer["Wrong"]",
+                    text: "@Localizer["IntNring"]"
+                });
+
+                document.getElementById("preloader").style.display = 'none';
+            }
+            // проверяем Nring != 0
+            else if ((parseInt(Nring.value) <= 0) && methodSelected != 7003) {
+                Swal.fire({
+                    icon: "error",
+                    title: "@Localizer["Wrong"]",
+                    text: "@Localizer["Nring0"]"
+                });
+
+                document.getElementById("preloader").style.display = 'none';
+            }
+            // в случае отсутствия ошибок
+            else {
+
+                // проверка выбрался ли архив
+                if (document.getElementById("zipLabel").textContent == " Файлы не выбраны ") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["SelectBefore"]"
+                    });
+                } else {
+
+                    $.ajax({
+                        url: '/Method/MethodsScript',
+                        type: 'POST',
+                        contentType: false,
+                        processData: false,
+                        data: dataMethod,
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+
+                            document.getElementById("preloader").style.display = 'none';
+
+                            console.log(data);
+
+                            // проверка производится в файле и возвращает "error"
+                            // в случае разности количества частиц в исходных файлах выводится ошибка
+                            if (data.replace(/\s+/g, ' ').trim() == "error") {
+
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "@Localizer["Wrong"]",
+                                    text: "@Localizer["NumIspWrong"]"
+                                });
+
+                                document.getElementById("preloader").style.display = 'none';
+
+                            }
+                            else if (data.trim() == "archiveerror") {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "@Localizer["ArchError"]",
+                                    text: "@Localizer["AttnMSD"]"
+                                });
+                            }
+                            // проверка, если python файл не сработал
+                            else if (data == "") {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "test",
+                                    text: "test"
+                                });
+                            }
+                            else if (switchStatusSEM == true) {
+
+                                // проверка на одно испытание в архиве
+                                if (data.replace(/\s+/g, ' ').trim() == "oneFile") {
+
+                                    document.getElementById("preloader").style.display = 'none'; // остановить лоадер
+
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "@Localizer["Wrong"]",
+                                        text: "@Localizer["oneFile"]"
+                                    });
+
+                                }
+                                else {
+
+
+
+                                    MSDimage = fullPath + decodeURIComponent(data).split("\n")[1];
+
+                                    document.getElementById("preloader").style.display = 'none'; // остановить лоадер
+                                    document.getElementById("MSDtxt").style.display = (methodSelected == "7003" || methodSelected == "8003" || methodSelected == "9003") ? 'flex' : 'none';; // вывести кнопку скачать файлы
+
+                                    // отображение графика
+                                    document.getElementById("SEMGraphic").style.display = (methodSelected == "1004" || methodSelected == "7003" || methodSelected == "8003" || methodSelected == "9003") ? 'inherit' : 'none';
+                                    document.getElementById("imgMSD").src = decodeURIComponent(data).split("\n")[1];
+                                    document.getElementById('imgMSD').style.display = (methodSelected == "1004" || methodSelected == "7003" || methodSelected == "8003" || methodSelected == "9003") ? 'inherit' : 'none';
+
+                                    document.getElementById("dropbtnMSD").style.display = (methodSelected == "7003" || methodSelected == "8003" || methodSelected == "9003") ? 'inherit' : 'none'; // кнопка сохранения графика
+                                    document.getElementById("exten").style.display = (methodSelected == "8003" || methodSelected == "9003") ? 'inherit' : 'none'; // выборка расширение сохраняемого файла
+                                }
+
+                                // если не выбрано построение графика ошибок SEM
+                            } else if (switchStatusSEM == false) {
+
+                                /*
+                                MSDimage = fullPath + decodeURIComponent(data).split("\n")[1];
+
+                                document.getElementById("preloader").style.display = 'none'; // остановить лоадер
+                                document.getElementById("MSDtxt").style.display = (methodSelected == "7003" || methodSelected == "8003") ? 'flex' : 'none';; // вывести кнопку скачать файлы
+
+                                // отображение графика
+                                document.getElementById("SEMGraphic").style.display = (methodSelected == "7003" || methodSelected == "8003") ? 'inherit' : 'none';
+                                document.getElementById("imgMSD").src = decodeURIComponent(data);
+                                document.getElementById('imgMSD').style.display = (methodSelected == "7003" || methodSelected == "8003") ? 'inherit' : 'none';
+                                document.getElementById("dropbtnMSD").style.display = (methodSelected == "7003" || methodSelected == "8003") ? 'inherit' : 'none'; // кнопка сохранения графика
+                                document.getElementById("exten").style.display = (methodSelected == "8003") ? 'inherit' : 'none'; // выборка расширение сохраняемого файла
+                                */
+
+                                MSDimage = fullPath + decodeURIComponent(data);
+
+                                document.getElementById("preloader").style.display = "none"; // останавливаем лоадер
+                                document.getElementById("MSDtxt").style.display = (methodSelected == "7003" || methodSelected == "8003" || methodSelected == "9003") ? 'flex' : 'none'; // кнопка скачать файлы
+                                document.getElementById("dropbtnMSD").style.display = (methodSelected == "7003" || methodSelected == "8003" || methodSelected == "9003") ? 'inherit' : 'none'; // кнопка сохранения графика
+                                document.getElementById("SEMGraphic").style.display = (methodSelected == "7003" || methodSelected == "8003" || methodSelected == "9003") ? 'inherit' : 'none';
+                                document.getElementById("imgMSD").src = decodeURIComponent(data) + "?rand=" + Math.random(); // ставим rand для возможного обновления картинки
+                                //document.getElementById("imgMSD").src = decodeURIComponent(data);
+                                document.getElementById("imgMSD").style.display = (methodSelected == "7003" || methodSelected == "8003" || methodSelected == "9003") ? 'inherit' : 'none';
+
+                            }
+
+                        }, error: function (data) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "@Localizer["Wrong"]",
+                                text: "@Localizer["VerifyData"]"
+                            });
+                        }
+                    })
+                }
+            }
+        });
+
+        var switchStatusSEM = false;
+        $("#SEM").on('change', function () {
+            if ($(this).is(':checked')) {
+                switchStatusSEM = $(this).is(':checked');
+
+            }
+            else {
+                switchStatusSEM = $(this).is(':checked');
+            }
+        });
+
+        var switchStatusGraphic = false;
+        $("#graphic").on('change', function () {
+            if ($(this).is(':checked')) {
+                switchStatusGraphic = $(this).is(':checked');
+            }
+            else {
+                switchStatusGraphic = $(this).is(':checked');
+            }
+        });
+
+        $("#otherButton").click(function (e) {
+
+            document.getElementById("preloader").style.display = 'inherit';
+
+            // проверяем выбранный метод
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+
+            if (document.getElementById("cfgLabel").textContent == "@Localizer["NoFileChosen"]" || document.getElementById("coorLabel").textContent == "@Localizer["NoFileChosen"]") {
+                Swal.fire({
+                    icon: "error",
+                    title: "@Localizer["Wrong"]",
+                    text: "@Localizer["SelectBefore"]"
+                });
+            } else {
+
+                alert(array);
+
+                $.ajax({
+                    url: '/Method/MethodsScript',
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    // кодируем строки
+                    data: JSON.stringify(encodeURIComponent(methodSelected) + "-" + decodeURIComponent(array[0]) + "-" + decodeURIComponent(array[array.length - 1])),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        document.getElementById("preloader").style.display = 'none';
+
+                        /* Вывод данных в алерт
+                        Swal.fire({
+                            icon: "success",
+                            title: "Результаты получены!",
+                            text: "Название файла " + decodeURIComponent(data) // декодируем результат
+                        });
+                        */
+
+                        // alert(decodeURIComponent(data));
+
+                        document.getElementById("SEMGraphic").style.display = (methodSelected == "5003") ? 'inherit' : 'none';
+                        graphPath = decodeURIComponent(data);
+                        MSDimage = fullPath + graphPath;
+
+                        console.log(data);
+
+                        // отображение графика
+                        /*
+                        document.getElementById("img_1").src = decodeURIComponent(data);
+                        document.getElementById('img_1').style.display = (methodSelected == "5003") ? 'inherit' : 'none';*/
+                        document.getElementById("imgMSD").src = decodeURIComponent(data) + "?rand=" + Math.random(); // ставим rand для возможного обновления картинки
+                        document.getElementById("imgMSD").style.display = (methodSelected == "5003") ? 'inherit' : 'none';
+
+                        // активируем кнопку "сохранить"
+                        document.getElementById("dropbtn").style.display = "inherit";
+
+                        data = data.replace(/[\\/]/g, '//'); // меняем слеши
+
+                        voronoyGraph = fullPath + data; // определяем путь к созданному графику
+
+                    },
+                    error: function () {
+                        Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["VerifyData"]"
+                    });
+
+                    }
+                });
+            }
+        });
+
+        $("#MSDtxt").click(function (e)
+        {
+            // определяем выбранный метод (для скачивания соответствующего файла)
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+
+            $.ajax({
+                url: '/File/Write',
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                // кодируем строки
+                data: JSON.stringify(particleAmount + '\n' + diameters),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (methodSelected == "7003") {
+                        // в случае построения графика скачиваем архив файлов (SEM, Average, MSD)
+                        if (switchStatusSEM == true) {
+                            window.location.href = "/File/Download/?filePath=MSD_Files.zip&heatmapData.txt&fileName=MSD_Files.zip";
+                        }
+                        // иначе скачиваем просто MSD
+                        else {
+                            window.location.href = "/File/Download/?filePath=MSD.txt&heatmapData.txt&fileName=MSD.txt";
+                        }
+                    }
+                    else if (methodSelected == "8003" || methodSelected == "9003") {
+
+                        // в случае построения графика скачиваем архив файлов (SEM, Average, MSD)
+                        if (switchStatusSEM == true) {
+                            window.location.href = "/File/Download/?filePath=outputS4.zip&heatmapData.txt&fileName=outputS.zip";
+                        }
+                        // иначе скачиваем просто MSD
+                        else { // get rS filename
+                            window.location.href = "/File/Download/?filePath=rS.txt&heatmapData.txt&fileName=rS.txt";
+                        }
+                    }
+                    else if (methodSelected == "1004" || methodSelected == "2003" || methodSelected == "3003" || methodSelected == "4003") {
+                        window.location.href = "/File/Download/?filePath=output.zip&heatmapData.txt&fileName=output.zip";
+                    }
+
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["VerifyData"]"
+                    });
+
+                }
+            });
+
+        });
+
+        $("#img_4").click(function (e) {
+
+            $.ajax({
+                url: '/File/Write',
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                // кодируем строки
+                data: JSON.stringify(particleAmount + '\n' + diameters),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    window.location.href = "/File/Download/?filePath=particlesData.txt&heatmapData.txt&fileName=particlesData.txt";
+
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["VerifyData"]"
+                    });
+
+                }
+            });
+
+        });
+
+        $(".example").click(function (e) {
+
+            // определяем выбранный метод (для скачивания соответствующего файла)
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+
+            $.ajax({
+                url: '/File/Write',
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                // кодируем строки
+                data: JSON.stringify(particleAmount + '\n' + diameters),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    // при выборе соответствующего метода скачивается соответствующий файл с примером
+                    if (methodSelected == 7003) {
+                        window.location.href = "/File/Download/?filePath=16.txt&heatmapData.txt&fileName=16.txt";
+                    }
+                    else if (methodSelected == 8003) {
+                        window.location.href = "/File/Download/?filePath=5.txt&heatmapData.txt&fileName=5.txt";
+                    }
+
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: "error",
+                        title: "@Localizer["Wrong"]",
+                        text: "@Localizer["VerifyData"]"
+                    });
+
+                }
+            });
+
+        });
+
+        // событие ввода числа генерируемых частиц
+        $('#num_particles').keyup(function () {
+            num_particles = $('#num_particles').val();
+
+            // document.getElementById("genButton").disabled = false;
+        });
+
+        $("#genButton").click(function (e) {
+
+            var typeValue = $("input[name='type']:checked").val();
+            var statusValue = $("input[name='status']:checked").val();
+
+            // определяем выбранный метод (для скачивания соответствующего файла)
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+            var folder; // для хранения папки
+            var inData; // для хранения входных данных
+
+            // папка в зависимости от выбранного метода
+            if (methodSelected == "1004") {
+                folder = "BOPcoordinates";
+                inData = "particlesGenerate" + "-" + typeValue + "-" + statusValue + "-" + num_particles + "-" + folder;
+            }
+            else if (methodSelected == "2003") {
+                folder = "RUncoordinates";
+                inData = "particlesGenerate" + "-" + typeValue + "-" + "L" + "-" + num_particles + "-" + folder;
+            }
+            else if (methodSelected == "3003") {
+                folder = "LDcoordinates";
+                inData = "particlesGenerate" + "-" + typeValue + "-" + "S" + "-" + num_particles + "-" + folder;
+            }
+            else if (methodSelected == "4003") {
+                folder = "SFcoordinates";
+                inData = "particlesGenerate" + "-" + typeValue + "-" + statusValue + "-" + num_particles + "-" + folder;
+            }
+
+            var type = $('input[name="type"]:checked').val();
+
+            document.getElementById("preloader").style.display = 'inherit';
+
+            // фильтр по числу частиц
+            if (Number(num_particles) <= 0 || isNaN(Number(num_particles)) && type.trim() == "chaos") {
+
+                document.getElementById("preloader").style.display = 'none';
+
+                Swal.fire({
+                    icon: "error",
+                    title: "@Localizer["Wrong"]",
+                    text: "@Localizer["FormatError"]"
+                });
+
+            } else {
+
+                $.ajax({
+                    url: '/Method/MethodsScript',
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    // кодируем строки
+                    data: JSON.stringify(inData),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        document.getElementById("preloader").style.display = 'none';
+
+                        generatedFileName = data.trim();
+
+                        if (data.trim() != "") {
+
+                            Swal.fire({
+                                icon: "success",
+                                title: "@Localizer["Success"]",
+                                text: "@Localizer["CoorGenerated"]"
+                            });
+
+                            document.getElementById("num_subarea").disabled = false;
+                            document.getElementById("goIS").disabled = false;
+                        };
+
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+
+        });
+
+        $("#goIS").click(function (e) {
+
+            var inData; // переменная для хранения входных данных
+
+            // определяем выбранный метод
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+
+            if (methodSelected == "1004") {
+                folder = "BOPcoordinates";
+            } else if (methodSelected == "2003") {
+                folder = "RUncoordinates";
+            } else if (methodSelected == "3003") {
+                folder = "LDcoordinates";
+            }
+            else if (methodSelected == "4003") {
+                folder = "SFcoordinates";
+            }
+
+            var num_subarea = $('#num_subarea').val(); // num 3
+            var typeValue = $("input[name='type']:checked").val();
+            var statusValue = $("input[name='status']:checked").val();
+
+            // определяем выбранный метод (для скачивания соответствующего файла)
+            var selectlist = document.getElementById("selected");
+            var methodSelected = selectlist.options[selectlist.selectedIndex].value;
+
+            // определяем выбранный метод (файл - file или генерация - inputs)
+            var selectlist = document.getElementById("selected");
+            var selectData = document.getElementById("dataselected");
+
+            document.getElementById("preloader").style.display = 'inherit';
+
+            // настройка входных данных в зависимости от импортируемых данных
+            if (selectData.value == "inputs") {
+                inData = JSON.stringify(methodSelected + "-" + statusValue + "-" + num_subarea + "-" + generatedFileName + "-" + folder);
+            }
+            else if (selectData.value == "file") {
+                inData = JSON.stringify(methodSelected + "-" + statusValue + "-" + num_subarea + "-" + generatedFileName + "-" + "files\\" + generatedFolderName);
+            }
+
+            // фильтр по количеству подобластей
+            if (Number(num_subarea) <= 0 || isNaN(Number(num_subarea)) ) {
+
+                document.getElementById("preloader").style.display = 'none';
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Что-то не так..",
+                    text: "Ошибка формата данных"
+                });
+
+            } else {
+                $.ajax({
+                    url: '/Method/MethodsScript',
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    // кодируем строки
+                    data: inData,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        document.getElementById("preloader").style.display = 'none';
+
+                        if (data.trim() == "length error") {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Что-то не так..",
+                                text: "Ошибка входных данных"
+                            });
+                        }
+                        // проверка, если python файл не сработал
+                        else if (data == "") {
+                            Swal.fire({
+                                icon: "error",
+                                title: "test",
+                                text: "test"
+                            });
+                        }
+                        else {
+                            heatmapImage = fullPath + decodeURIComponent(data).split("\n")[0];
+                            MSDimage = fullPath + decodeURIComponent(data).split("\n")[1];
+
+                            document.getElementById("MSDtxt").style.display = (methodSelected == "1004" || methodSelected == "2003" || methodSelected == "4003" || methodSelected == "3003") ? 'flex' : 'none'; // вывести кнопку скачать файлы
+
+                            document.getElementById("SEMGraphic").style.display = (methodSelected == "1004" || methodSelected == "2003" || methodSelected == "4003" || methodSelected == "3003") ? 'inherit' : 'none';
+
+                            document.getElementById("imgMSD").src = decodeURIComponent(data).split("\n")[1].trim() + "?rand=" + Math.random();
+                            document.getElementById('imgMSD').style.display = (methodSelected == "1004" || methodSelected == "2003" || methodSelected == "4003" || methodSelected == "3003") ? 'inherit' : 'none';
+
+                            document.getElementById("imgHeatMap").src = decodeURIComponent(data).split("\n")[0].trim() + "?rand=" + Math.random();
+                            document.getElementById('imgHeatMap').style.display = (methodSelected == "1004" || methodSelected == "2003" || methodSelected == "4003" || methodSelected == "3003") ? 'inherit' : 'none';
+
+                            document.getElementById("dropbtnMSD").style.display = (methodSelected == "1004" || methodSelected == "2003" || methodSelected == "4003" || methodSelected == "3003") ? 'inherit' : 'none'; // кнопка сохранения графика
+                            document.getElementById("exten").style.display = (methodSelected == "1004" || methodSelected == "2003" || methodSelected == "4003" || methodSelected == "3003") ? 'inherit' : 'none'; // выборка расширение сохраняемого файла
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+        });
+
+        $("#partType").change(function () {
+
+            var istypeValue = $("input[name='type']:checked").val() == "order"; // чекаем значение радиобаттона
+
+            // если выбрана упорядоченная генерация, то запрещаем пользователю вводить число части
+            if (istypeValue) {
+                document.getElementById("num_particles").disabled = true;
+            }
+            else {
+                document.getElementById("num_particles").removeAttribute('disabled');
+            }
+        });
+
+        // УДАЛЕНИЕ ВЫБРАННОГО АРХИВА
+        $("#zipRemove").click(function () {
+
+            array = [];
+
+            document.getElementById("zipChoose").disabled = false;
+            document.getElementById("zipLabel").innerHTML = "@Localizer["NoFileChosen"]";
+            document.getElementById("zipRemove").style.display = "none";
+
+        });
+
+        // УДАЛЕНИЕ ВЫБРАННОГО АРХИВА
+        $("#coorRemove").click(function () {
+
+            array = [];
+
+            document.getElementById("coorChoose").disabled = false;
+            document.getElementById("coorLabel").innerHTML = "@Localizer["NoFileChosen"]";
+            document.getElementById("coorRemove").style.display = "none";
+        });
+
+        // УДАЛЕНИЕ ВЫБРАННОГО АРХИВА
+        $("#circRemove").click(function () {
+
+            array = [];
+
+            document.getElementById("circChoose").disabled = false;
+            document.getElementById("circLabel").innerHTML = "@Localizer["NoFileChosen"]";
+            document.getElementById("circRemove").style.display = "none";
+        });
+
+        // УДАЛЕНИЕ ВЫБРАННОГО АРХИВА
+        $("#cfgRemove").click(function () {
+
+            array = [];
+
+            document.getElementById("cfgChoose").disabled = false;
+            document.getElementById("cfgLabel").innerHTML = "@Localizer["NoFileChosen"]";
+            document.getElementById("cfgRemove").style.display = "none";
+        });
+
+        // АВТОМАТИЧЕСКИЙ РАССЧЕТ ГРАНИЦ
+        $("#autoBorders").on('change', function () {
+
+            document.getElementById("borderLeft").disabled = $('#autoBrdrs').is(':checked') ? true : false;
+            document.getElementById("borderRight").disabled = $('#autoBrdrs').is(':checked') ? true : false;
+
+            autoBorderStatus = $('#autoBrdrs').is(':checked'); // глобальная переменная в скрипт
+        });
+
+
+    </script>
+}

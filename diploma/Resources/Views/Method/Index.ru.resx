@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddForm" xml:space="preserve">
+    <value>Форма добавления параметров</value>
+  </data>
+  <data name="AddParam" xml:space="preserve">
+    <value>Добавить параметр</value>
+  </data>
+  <data name="AlreadyMoved" xml:space="preserve">
+    <value>Файл уже перемещен!</value>
+  </data>
+  <data name="Angles" xml:space="preserve">
+    <value>Углы Фjk</value>
+  </data>
+  <data name="ArchError" xml:space="preserve">
+    <value>Ошибка данных</value>
+  </data>
+  <data name="Attention" xml:space="preserve">
+    <value>Внимание!</value>
+  </data>
+  <data name="AttnMSD" xml:space="preserve">
+    <value>Загрузка архива допускается только с расширением .7z</value>
+  </data>
+  <data name="AttnSelectFile" xml:space="preserve">
+    <value>Выберите файлы перед запуском метода!</value>
+  </data>
+  <data name="AutoBorders" xml:space="preserve">
+    <value>Автоматически высчитать границы</value>
+  </data>
+  <data name="borderWarning" xml:space="preserve">
+    <value>Ошибка границ</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="CheckFile" xml:space="preserve">
+    <value>Проверьте корректность содержимого файлов перед использованием!</value>
+  </data>
+  <data name="CheckFileAngle" xml:space="preserve">
+    <value>Загружаемые файлы должны содержать в себе информацию о частицах: первые два столбца - координаты х, у; третий столбец - радиус частицы. </value>
+  </data>
+  <data name="CheckFileDist" xml:space="preserve">
+    <value>Файлы должны иметь следующий вид: на первой строке указывается количество ближайших соседей, на следующей - расстояния через запятую.</value>
+  </data>
+  <data name="Circ1" xml:space="preserve">
+    <value>Импортируется изображение частиц, которые надо распознать.</value>
+  </data>
+  <data name="Circ2" xml:space="preserve">
+    <value>В зависимости от величины изображения его анализ может занимать до нескольких минут.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="CoorConf" xml:space="preserve">
+    <value>Содержание файла координат частиц</value>
+  </data>
+  <data name="CoorGenerated" xml:space="preserve">
+    <value>Координаты сгенерированы!</value>
+  </data>
+  <data name="Data1" xml:space="preserve">
+    <value>В данном файле хранится информация о количестве распознанных частиц и об их диаметре.</value>
+  </data>
+  <data name="Data2" xml:space="preserve">
+    <value>Пример такого файла представлен на рисунке ниже.</value>
+  </data>
+  <data name="DetectedPart" xml:space="preserve">
+    <value>Распознанные частицы</value>
+  </data>
+  <data name="DirNoFIle" xml:space="preserve">
+    <value>В Вашей директории нет файлов</value>
+  </data>
+  <data name="DownData" xml:space="preserve">
+    <value>Скачать данные по частицам</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Скачать файлы</value>
+  </data>
+  <data name="EnterWarn" xml:space="preserve">
+    <value>Введите значения в поля!</value>
+  </data>
+  <data name="ErrorFileMove" xml:space="preserve">
+    <value>Произошла ошибка при перемещении файлов!</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Файлы</value>
+  </data>
+  <data name="FileSuccessMoved" xml:space="preserve">
+    <value>Файл успешно перемещен!</value>
+  </data>
+  <data name="FormatError" xml:space="preserve">
+    <value>Ошибка формата данных</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>От</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Сгенерировать</value>
+  </data>
+  <data name="GenerateChaos" xml:space="preserve">
+    <value>Неупорядочено</value>
+  </data>
+  <data name="GenerateOrder" xml:space="preserve">
+    <value>Упорядочено</value>
+  </data>
+  <data name="GenerationType" xml:space="preserve">
+    <value>Тип генерации</value>
+  </data>
+  <data name="GetResult" xml:space="preserve">
+    <value>Результаты получены!</value>
+  </data>
+  <data name="Graph1" xml:space="preserve">
+    <value>Ввод параметров в данном методе допустим только из файлов.</value>
+  </data>
+  <data name="Graph2" xml:space="preserve">
+    <value>Импортируются конфигурационный файл и файл с координатами частиц.</value>
+  </data>
+  <data name="Graphic" xml:space="preserve">
+    <value>График</value>
+  </data>
+  <data name="GraphStr" xml:space="preserve">
+    <value>Про структуру входных файлов прочитайте здесь.</value>
+  </data>
+  <data name="InfPart" xml:space="preserve">
+    <value>Данные по частицам</value>
+  </data>
+  <data name="InputParameters" xml:space="preserve">
+    <value>Введите параметры метода</value>
+  </data>
+  <data name="InputValue" xml:space="preserve">
+    <value>Введите значения в поля!</value>
+  </data>
+  <data name="Instruction1" xml:space="preserve">
+    <value>1. Выбери требуемый метод из раскрывающего списка</value>
+  </data>
+  <data name="Instruction2" xml:space="preserve">
+    <value>2. Сразу после этого выбери источник данных (ручной ввод, ввод из БД и ввод из файла)</value>
+  </data>
+  <data name="Instruction3" xml:space="preserve">
+    <value>3. Обязательно проверь корректность вводимых данных</value>
+  </data>
+  <data name="Instruction4" xml:space="preserve">
+    <value>4. Нажимай на кнопку «Запустить»</value>
+  </data>
+  <data name="Instruction5" xml:space="preserve">
+    <value>5. Получи результаты</value>
+  </data>
+  <data name="InstructionTitle" xml:space="preserve">
+    <value>Инструкция по использованию методов:</value>
+  </data>
+  <data name="IntervalBorder" xml:space="preserve">
+    <value>Границы должны быть в промежутке [0, 1]!</value>
+  </data>
+  <data name="IntNring" xml:space="preserve">
+    <value>Значение количества колец должно быть целочислено!</value>
+  </data>
+  <data name="IsolatedParticle" xml:space="preserve">
+    <value>Изолированная частица</value>
+  </data>
+  <data name="Large" xml:space="preserve">
+    <value>Большая</value>
+  </data>
+  <data name="leftBigger" xml:space="preserve">
+    <value>Левая граница больше правой</value>
+  </data>
+  <data name="Method1Par1" xml:space="preserve">
+    <value>Количество соседей</value>
+  </data>
+  <data name="Method1Par2" xml:space="preserve">
+    <value>Углы в град. (через запятую)</value>
+  </data>
+  <data name="Method1Par3" xml:space="preserve">
+    <value>Расстояния</value>
+  </data>
+  <data name="Method1Par4" xml:space="preserve">
+    <value>Периметр ромба</value>
+  </data>
+  <data name="Method1Par5" xml:space="preserve">
+    <value>Площадь ромба</value>
+  </data>
+  <data name="MethodChoose" xml:space="preserve">
+    <value>Выберите метод</value>
+  </data>
+  <data name="MethodID" xml:space="preserve">
+    <value>Id Метода</value>
+  </data>
+  <data name="MSD1" xml:space="preserve">
+    <value>Для использования метода поиска среднеквадратичного смещения загрузите</value>
+  </data>
+  <data name="MSD2" xml:space="preserve">
+    <value>Архив координат должен содержать пронумерованные папки с испытаниями (но номеру испытания соответственно),
+               в которых содержатся файлы с координатами с расширением .txt. В первой строчке файла указывается временной шаг. Далее указываются столбцы, количество которых соответствует размерности задачи.</value>
+  </data>
+  <data name="MSD3" xml:space="preserve">
+    <value>Скачать пример структуры файла</value>
+  </data>
+  <data name="MSDArchive" xml:space="preserve">
+    <value>архив координат</value>
+  </data>
+  <data name="MSDInst" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Далее</value>
+  </data>
+  <data name="NoFile" xml:space="preserve">
+    <value>Файлы не выбраны</value>
+  </data>
+  <data name="NoFileChosen" xml:space="preserve">
+    <value> Файлы не выбраны </value>
+  </data>
+  <data name="NOP1" xml:space="preserve">
+    <value>Для использования метода поиска параметра нематического порядка необходимо загрузить</value>
+  </data>
+  <data name="NOP2" xml:space="preserve">
+    <value>Архив координат частиц должен состоять из txt-файлов, содержащих в себе координаты центров частиц, а также их радиус.</value>
+  </data>
+  <data name="NOP3" xml:space="preserve">
+    <value>архив координат частиц</value>
+  </data>
+  <data name="Nring0" xml:space="preserve">
+    <value>Количество колец должно быть больше нуля!</value>
+  </data>
+  <data name="NumIspWrong" xml:space="preserve">
+    <value>Количество частиц в испытаниях отличается!</value>
+  </data>
+  <data name="NumNeigh" xml:space="preserve">
+    <value>Количество ближайших соседей</value>
+  </data>
+  <data name="oneFile" xml:space="preserve">
+    <value>Нельзя построить график на одном испытании!</value>
+  </data>
+  <data name="OpenPic" xml:space="preserve">
+    <value>Открыть картинку в браузере</value>
+  </data>
+  <data name="ParticlesNum" xml:space="preserve">
+    <value>Число частиц</value>
+  </data>
+  <data name="PassPart" xml:space="preserve">
+    <value>Рассредоточенность частиц</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Результат:</value>
+  </data>
+  <data name="ResultSuccess" xml:space="preserve">
+    <value>Результаты получены!</value>
+  </data>
+  <data name="RingsNum" xml:space="preserve">
+    <value>Количество колец</value>
+  </data>
+  <data name="S41" xml:space="preserve">
+    <value>Для использования метода ориентационного порядка стержней необходимо загрузить</value>
+  </data>
+  <data name="S42" xml:space="preserve">
+    <value>Архив координат палочек должен состоять из txt-файлов, содержащих в себе координаты начала, середины и конца палочек по два столбца (х,у) соответственно.</value>
+  </data>
+  <data name="S43" xml:space="preserve">
+    <value>архив координат частиц</value>
+  </data>
+  <data name="S44" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="SelectArchive" xml:space="preserve">
+    <value>Выбрать архив координат</value>
+  </data>
+  <data name="SelectBefore" xml:space="preserve">
+    <value>Выберите файлы перед запуском метода!</value>
+  </data>
+  <data name="SelectConfFile" xml:space="preserve">
+    <value>Выбрать конфигурационный файл</value>
+  </data>
+  <data name="SelectCoordFile" xml:space="preserve">
+    <value>Выбрать файл с координатами</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Выбрать файл</value>
+  </data>
+  <data name="SEM" xml:space="preserve">
+    <value>Рассчитать среднеквадратичную ошибку</value>
+  </data>
+  <data name="Small" xml:space="preserve">
+    <value>Маленькая</value>
+  </data>
+  <data name="Source1" xml:space="preserve">
+    <value>Ручной ввод</value>
+  </data>
+  <data name="Source2" xml:space="preserve">
+    <value>Мой файл</value>
+  </data>
+  <data name="Source3" xml:space="preserve">
+    <value>База данных</value>
+  </data>
+  <data name="SourceChoose" xml:space="preserve">
+    <value>Выберите источник данных</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Запустить</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SubfieldNum" xml:space="preserve">
+    <value>Количество подобластей</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Успешно!</value>
+  </data>
+  <data name="Sure" xml:space="preserve">
+    <value>Вы уверены?</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Применение методов</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>До</value>
+  </data>
+  <data name="UserID" xml:space="preserve">
+    <value>Id Пользователя</value>
+  </data>
+  <data name="VerifyData" xml:space="preserve">
+    <value>Проверьте правильность введенных данных!</value>
+  </data>
+  <data name="VerifyData2" xml:space="preserve">
+    <value>Проверьте правильность введенных данных перед запуском!</value>
+  </data>
+  <data name="VorConf" xml:space="preserve">
+    <value>Содержимое конфигурационного файла</value>
+  </data>
+  <data name="VorConf2" xml:space="preserve">
+    <value>Пример входной информации, поступающей в виде файла конфигурации частиц, представлена на рисунке ниже.</value>
+  </data>
+  <data name="VorConf3" xml:space="preserve">
+    <value>В отработке самого скрипта метода используются такие величины как:</value>
+  </data>
+  <data name="VorConf4" xml:space="preserve">
+    <value>количество частиц, радиус частиц_1, радиус частиц_2, радиус капли и коэффициент обезразмеривания</value>
+  </data>
+  <data name="VorCoor1" xml:space="preserve">
+    <value>Пример файла с координатами частиц представлен на рисунке ниже.</value>
+  </data>
+  <data name="VorCoor2" xml:space="preserve">
+    <value>*третий и четвертый столбцы не обязательны</value>
+  </data>
+  <data name="Warning1004" xml:space="preserve">
+    <value>Данный метод применяется только для S-частиц, изолирующих L-частицы</value>
+  </data>
+  <data name="Wrong" xml:space="preserve">
+    <value>Что-то не так...</value>
+  </data>
+  <data name="WrongBorder" xml:space="preserve">
+    <value>Ошибка при вводе границ!</value>
+  </data>
+  <data name="WrongExtension" xml:space="preserve">
+    <value>Неподходящее расширение архива!</value>
+  </data>
+  <data name="WrongParameters" xml:space="preserve">
+    <value>Неправильно введены параметры!</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+</root>

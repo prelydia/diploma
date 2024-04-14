@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddForm" xml:space="preserve">
+    <value>Adding parameters form</value>
+  </data>
+  <data name="AddParam" xml:space="preserve">
+    <value>Add parameter</value>
+  </data>
+  <data name="AlreadyMoved" xml:space="preserve">
+    <value>The file has already been moved!</value>
+  </data>
+  <data name="Angles" xml:space="preserve">
+    <value>Angles Фjk</value>
+  </data>
+  <data name="Attention" xml:space="preserve">
+    <value>Attention!</value>
+  </data>
+  <data name="AttnMSD" xml:space="preserve">
+    <value>Uploading an archive is only allowed with the .7z extension.</value>
+  </data>
+  <data name="AttnSelectFile" xml:space="preserve">
+    <value>Select files before running the method!</value>
+  </data>
+  <data name="AutoBorders" xml:space="preserve">
+    <value>Сalculate borders automatically</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CheckFile" xml:space="preserve">
+    <value>Please verify the correctness of the file contents before usage!</value>
+  </data>
+  <data name="CheckFileAngle" xml:space="preserve">
+    <value>The files should have the following format: the first line specifies the number of nearest neighbors, and the next line contains angles фjk separated by commas</value>
+  </data>
+  <data name="CheckFileDist" xml:space="preserve">
+    <value>The files should have the following format: the first line specifies the number of nearest neighbors, and the next line contains distances separated by commas</value>
+  </data>
+  <data name="Circ1" xml:space="preserve">
+    <value>Particles image is imported for recognition.</value>
+  </data>
+  <data name="Circ2" xml:space="preserve">
+    <value>Depending on the image size, its analysis may take up to several minutes.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="CoorConf" xml:space="preserve">
+    <value>The content of the particle coordinates file</value>
+  </data>
+  <data name="CoorGenerated" xml:space="preserve">
+    <value>The coordinates have been generated!</value>
+  </data>
+  <data name="Data1" xml:space="preserve">
+    <value>This file contains information about the number of recognized particles and their diameter.</value>
+  </data>
+  <data name="Data2" xml:space="preserve">
+    <value>An example of such a file is presented in the figure below.</value>
+  </data>
+  <data name="DetectedPart" xml:space="preserve">
+    <value>Recognized particles</value>
+  </data>
+  <data name="DirNoFIle" xml:space="preserve">
+    <value>There are no files in your directory</value>
+  </data>
+  <data name="DownData" xml:space="preserve">
+    <value>Download particle data</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download files</value>
+  </data>
+  <data name="EnterWarn" xml:space="preserve">
+    <value>Enter values in the fields!</value>
+  </data>
+  <data name="ErrorFileMove" xml:space="preserve">
+    <value>Error occurred while moving the files!</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="FileSuccessMoved" xml:space="preserve">
+    <value>The file has been successfully moved!</value>
+  </data>
+  <data name="FormatError" xml:space="preserve">
+    <value>Data format error</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Generate</value>
+  </data>
+  <data name="GenerateChaos" xml:space="preserve">
+    <value>Chaos</value>
+  </data>
+  <data name="GenerateOrder" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="GenerationType" xml:space="preserve">
+    <value>Generation type</value>
+  </data>
+  <data name="GetResult" xml:space="preserve">
+    <value>Results obtained!</value>
+  </data>
+  <data name="Graph1" xml:space="preserve">
+    <value>Input of parameters in this method is only allowed from files.</value>
+  </data>
+  <data name="Graph2" xml:space="preserve">
+    <value>Both a configuration file and a particle coordinates file are imported.</value>
+  </data>
+  <data name="Graphic" xml:space="preserve">
+    <value>Graphic</value>
+  </data>
+  <data name="GraphStr" xml:space="preserve">
+    <value>Про структуру входных файлов прочитайте здесь.</value>
+  </data>
+  <data name="InfPart" xml:space="preserve">
+    <value>Particle data</value>
+  </data>
+  <data name="InputParameters" xml:space="preserve">
+    <value>Enter method parameters</value>
+  </data>
+  <data name="InputValue" xml:space="preserve">
+    <value>Enter values in the fields!</value>
+  </data>
+  <data name="Instruction1" xml:space="preserve">
+    <value>1. Select the required method from the dropdown list</value>
+  </data>
+  <data name="Instruction2" xml:space="preserve">
+    <value>2. Choose the data source after that (manual input, database input, and file input)</value>
+  </data>
+  <data name="Instruction3" xml:space="preserve">
+    <value>3. Always ensure the correctness of the entered data</value>
+  </data>
+  <data name="Instruction4" xml:space="preserve">
+    <value>4. Click the "Run" button</value>
+  </data>
+  <data name="Instruction5" xml:space="preserve">
+    <value>5. Obtain the results</value>
+  </data>
+  <data name="InstructionTitle" xml:space="preserve">
+    <value>Instructions for using the methods:</value>
+  </data>
+  <data name="IntervalBorder" xml:space="preserve">
+    <value>Borders must be in the interval [0, 1]!</value>
+  </data>
+  <data name="IntNring" xml:space="preserve">
+    <value>The number of rings must be integer!</value>
+  </data>
+  <data name="IsolatedParticle" xml:space="preserve">
+    <value>Isolated particle</value>
+  </data>
+  <data name="Large" xml:space="preserve">
+    <value>Large</value>
+  </data>
+  <data name="Method1Par1" xml:space="preserve">
+    <value>Number of neighbors</value>
+  </data>
+  <data name="Method1Par2" xml:space="preserve">
+    <value>Angles in degrees (comma-separated)</value>
+  </data>
+  <data name="Method1Par3" xml:space="preserve">
+    <value>Distances</value>
+  </data>
+  <data name="Method1Par4" xml:space="preserve">
+    <value>Perimeter of the rhombus</value>
+  </data>
+  <data name="Method1Par5" xml:space="preserve">
+    <value>Area of the rhombus</value>
+  </data>
+  <data name="MethodChoose" xml:space="preserve">
+    <value>Select a method</value>
+  </data>
+  <data name="MethodID" xml:space="preserve">
+    <value>Method ID</value>
+  </data>
+  <data name="MSD1" xml:space="preserve">
+    <value>To utilize the method for calculating the mean squared displacement, please upload</value>
+  </data>
+  <data name="MSD2" xml:space="preserve">
+    <value>The coordinate archive should contain numbered experiment folders (corresponding to the trial number), each containing .txt files with coordinates. The first line of the file specifies the time step. Following that, columns are listed, the number of which corresponds to the dimensionality of the problem.</value>
+  </data>
+  <data name="MSD3" xml:space="preserve">
+    <value>Download example coordinate file structure</value>
+  </data>
+  <data name="MSDArchive" xml:space="preserve">
+    <value>the coordinate archive</value>
+  </data>
+  <data name="MSDInst" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="NoFile" xml:space="preserve">
+    <value>Files are not selected</value>
+  </data>
+  <data name="NoFileChosen" xml:space="preserve">
+    <value>No files selected</value>
+  </data>
+  <data name="Nring0" xml:space="preserve">
+    <value>The number of rings must be greater than zero!</value>
+  </data>
+  <data name="NumIspWrong" xml:space="preserve">
+    <value>The number of particles in the trials is different!</value>
+  </data>
+  <data name="NumNeigh" xml:space="preserve">
+    <value>Number of nearest neighbors</value>
+  </data>
+  <data name="oneFile" xml:space="preserve">
+    <value>You can’t build a graph on one experiment!</value>
+  </data>
+  <data name="OpenPic" xml:space="preserve">
+    <value>Open the image in the browser</value>
+  </data>
+  <data name="ParticlesNum" xml:space="preserve">
+    <value>Number of particles</value>
+  </data>
+  <data name="PassPart" xml:space="preserve">
+    <value>Particle dispersion</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Result:</value>
+  </data>
+  <data name="ResultSuccess" xml:space="preserve">
+    <value>Results obtained!</value>
+  </data>
+  <data name="RingsNum" xml:space="preserve">
+    <value>Number of rings</value>
+  </data>
+  <data name="S41" xml:space="preserve">
+    <value>To use the rod orientation method, you need to upload</value>
+  </data>
+  <data name="S42" xml:space="preserve">
+    <value>The archive of the coordinates of the rods should consist of txt-files containing the coordinates of the beginning, middle and end of the rods of two columns (x,y) respectively.</value>
+  </data>
+  <data name="S43" xml:space="preserve">
+    <value>an archive of rod coordinates here</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SelectArchive" xml:space="preserve">
+    <value>Select a coordinate archive</value>
+  </data>
+  <data name="SelectBefore" xml:space="preserve">
+    <value>Select files before running the method!</value>
+  </data>
+  <data name="SelectConfFile" xml:space="preserve">
+    <value>Select a configuration file</value>
+  </data>
+  <data name="SelectCoordFile" xml:space="preserve">
+    <value>Select a coordinates file</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Select a file</value>
+  </data>
+  <data name="SEM" xml:space="preserve">
+    <value>Calculate the root mean square error</value>
+  </data>
+  <data name="Small" xml:space="preserve">
+    <value>Small</value>
+  </data>
+  <data name="Source1" xml:space="preserve">
+    <value>Manual Input</value>
+  </data>
+  <data name="Source2" xml:space="preserve">
+    <value>My file</value>
+  </data>
+  <data name="Source3" xml:space="preserve">
+    <value>Data Base</value>
+  </data>
+  <data name="SourceChoose" xml:space="preserve">
+    <value>Select a data source</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="SubfieldNum" xml:space="preserve">
+    <value>Number of sub-fields</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success!</value>
+  </data>
+  <data name="Sure" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Application of Methods</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="UserID" xml:space="preserve">
+    <value>User ID</value>
+  </data>
+  <data name="VerifyData" xml:space="preserve">
+    <value>Please verify the accuracy of the entered data!</value>
+  </data>
+  <data name="VerifyData2" xml:space="preserve">
+    <value>Please check the accuracy of the entered data before proceeding!</value>
+  </data>
+  <data name="VorConf" xml:space="preserve">
+    <value>Contents of the configuration file</value>
+  </data>
+  <data name="VorConf2" xml:space="preserve">
+    <value>An example of input information provided in the form of a particle configuration file is shown in the figure below.</value>
+  </data>
+  <data name="VorConf3" xml:space="preserve">
+    <value>In the execution of the method script, the following quantities are used:</value>
+  </data>
+  <data name="VorConf4" xml:space="preserve">
+    <value>particle count, particle radius_1, particle radius_2, droplet radius, and scaling coefficient</value>
+  </data>
+  <data name="VorCoor1" xml:space="preserve">
+    <value>An example of a file with particle coordinates is presented in the figure below.</value>
+  </data>
+  <data name="VorCoor2" xml:space="preserve">
+    <value>*the third and fourth columns are not mandatory</value>
+  </data>
+  <data name="Warning1004" xml:space="preserve">
+    <value>This method is only used for S particles that isolate L-particles</value>
+  </data>
+  <data name="Wrong" xml:space="preserve">
+    <value>Something's wrong...</value>
+  </data>
+  <data name="WrongBorder" xml:space="preserve">
+    <value>Error while entering borders!</value>
+  </data>
+  <data name="WrongExtension" xml:space="preserve">
+    <value>Inappropriate archive extension!</value>
+  </data>
+  <data name="WrongParameters" xml:space="preserve">
+    <value>The parameters are entered incorrectly!</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+</root>
